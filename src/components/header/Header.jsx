@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Header.css";
 
-export default function Header() {
+export default function Header(props) {
   //Variables to store the state of the button
   const [isOpen, setIsOpen] = useState(false);
   //Variable for the dropDown
@@ -44,7 +44,7 @@ export default function Header() {
       </div>
 
       <div id="project-name">
-        <p>[Project-Name]</p>
+        <p>[PROJECT-NAME]</p>
       </div>
     </header>
   );
