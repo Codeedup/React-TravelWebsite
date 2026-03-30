@@ -1,14 +1,9 @@
 ---
-
+import Layout from "../layouts/Layout.astro"
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title></title>
-	</head>
-	<body>
-		I have just added a bit of text
-	</body>
-</html>
+<Layout client:side>
+	<h1> Test</h1>
+	<h3> <a href="./testLayout">Navigate to the second page</a> </h3>
+	<h3> <a href="./secondTest">Navigate to the third page</a> </h3>
+</Layout>
