@@ -61,11 +61,9 @@ pip3 freeze > requirements.txt -> takes a snapshot of the installed tools and sa
 ## Useful links
 
 For React I used -> https://react.dev/learn/writing-markup-with-jsx <br><br>
-
 For colours I used -> https://coolors.co/palette/606c38-283618-fefae0-dda15e-bc6c25 <br><br>
-
 To revise the css -> https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout <br><br>
-
 I also used some parts from the previous project -> https://git.arts.ac.uk/24032492/TSD <br><br>
-
+For free APIs: https://free-apis.github.io/#/browse <br><br>
+Cataas API: https://cataas.com <br><br>
 For JavaScript and Python I used Nick's previous in class exercises -> https://ual-moodle-sitedata.s3.eu-west-2.amazonaws.com/f5/11/f5110d83ad71bd57ddc90f554a2818f566f79402?response-content-disposition=inline%3B%20filename%3D%22Session%2004_%20Text%2C%20Data%20and%20API.pdf%22&response-content-type=application%2Fpdf&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2PCH3OG65JHUZNKL%2F20260330%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260330T180611Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21589&X-Amz-Signature=146e85d84feee3f9d9421248030aacbde28b75b37cf4c583943a6e7e25635ccc
