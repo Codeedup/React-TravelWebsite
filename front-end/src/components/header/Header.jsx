@@ -25,7 +25,11 @@ export default function Header(props) {
           </li>
 
           <li>
-            <a href="/secondPage">Second Page</a>
+            <a href="/catGenerator">Cats</a>
+          </li>
+
+          <li>
+            <a href="/catmotions">Emotions</a>
           </li>
         </ul>
       </div>
