@@ -1,10 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import CatMotions from "../components/catmotions/catmotions";
 ---
 
 <Layout client:side>
     
-	<h1>Third Page</h1>
-	
+	<h1>Catmotions finder</h1>
+	<h3>Write an emotion to see a cat</h3>
+	<CatMotions client:load/>
 </Layout>

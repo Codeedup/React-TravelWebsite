@@ -13,21 +13,27 @@ Overall, that's pretty much it about the app. I think the next steps we will nee
 
 ```text
 /
-├── backend/
-│   └── app.py -> Script for the API.
+├── back-end/
+│   ├── app.py              -> Main Flask API script
+│   ├── requirements.txt    -> Python dependencies
+│   └── testApi.ipynb       -> Jupyter notebook for testing logic
 │
-├── public/
-│
-├── src/
-│   └── components/
-│   │   └── header/ -> Here's the header.jsx and css
-│   │   └── testAPI/ -> Component for the API
-│   │ 
-│   └── layouts/ -> Inside here is the main layout which will be reused on every page
-│   │ 
-│   └── pages/
-│       └── index.astro -> Main page that astro uses.
-│       └── secondPage.astro ->Second page etc...
+├── front-end/
+│   ├── package.json
+│   ├── public/             -> Static assets (images, fonts)
+│   └── src/
+│       ├── components/     -> React components grouped by feature.
+│       │   ├── catAPI/     -> catGenerator.jsx & styles
+│       │   ├── catmotions/ -> catmotions.jsx & styles
+│       │   ├── header/     -> Navigation/Header UI
+│       │   └── testAPI/    -> Initial test components
+│       │ 
+│       ├── layouts/        -> Main Layout.astro (global wrapper)
+│       │ 
+│       └── pages/          -> Astro routes
+│           ├── index.astro
+│           ├── catGenerator.astro
+│           └── catmotions.astro
 ```
 
 ## Notes from Astro team
