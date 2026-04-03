@@ -25,9 +25,13 @@ try {
 } catch (error) {
 	console.error("could not reach Python api, using fallback data")
 }
+
+import { mySecret } from '../utils/secret.js';
+console.log(mySecret);
+
 ---
 
-<Layout client:side>
+<Layout client:rendering>
 	<h1>Landing page</h1>
 	<p>Welcome to {apiData.name}</p>
 

@@ -72,4 +72,5 @@ To revise the css -> https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Gri
 I also used some parts from the previous project -> https://git.arts.ac.uk/24032492/TSD <br><br>
 For free APIs: https://free-apis.github.io/#/browse <br><br>
 Cataas API: https://cataas.com <br><br>
-For JavaScript and Python I used Nick's previous in class exercises -> https://ual-moodle-sitedata.s3.eu-west-2.amazonaws.com/f5/11/f5110d83ad71bd57ddc90f554a2818f566f79402?response-content-disposition=inline%3B%20filename%3D%22Session%2004_%20Text%2C%20Data%20and%20API.pdf%22&response-content-type=application%2Fpdf&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2PCH3OG65JHUZNKL%2F20260330%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260330T180611Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21589&X-Amz-Signature=146e85d84feee3f9d9421248030aacbde28b75b37cf4c583943a6e7e25635ccc
+Json specification: https://www.json.org/json-en.html <br><br>
+For fetching data using API: https://docs.astro.build/en/guides/data-fetching/

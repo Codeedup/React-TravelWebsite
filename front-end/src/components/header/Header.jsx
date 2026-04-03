@@ -20,6 +20,7 @@ export default function Header(props) {
     dropDownMenu = (
       <div id="drop-down-menu-open">
         <ul>
+          
           <li>
             <a href="/">Home</a>
           </li>
@@ -31,6 +32,11 @@ export default function Header(props) {
           <li>
             <a href="/catmotions">Emotions</a>
           </li>
+
+          <li>
+            <a href="/apiTest">API Test</a>
+          </li>
+
         </ul>
       </div>
     );
