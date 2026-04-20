@@ -37,6 +37,10 @@ export default function Header(props) {
             <a href="/apiTest">API Test</a>
           </li>
 
+          <li>
+            <a href="/classExercise">Class exercise</a>
+          </li>
+
         </ul>
       </div>
     );
