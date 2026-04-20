@@ -187,7 +187,7 @@ def _(db):
     @_app.route("/objects_at_location/<loc_id>")     # Note the parameter here!
     @cross_origin(origin="*")
     def _get_objects(loc_id):
-        locations_frame = db.query("SELECT _primaryTitle FROM objects WHERE location_id = $loc_id", {"loc_id" : loc_id})
+        locations_frame = db.query("SELECT COALESCE(_primaryTitle, 'Untitled') AS _primaryTitle FROM objects WHERE location_id = $loc_id", {"loc_id" : loc_id})
         records = locations_frame.to_records(index=False)
         return { "data" : [{"title" : r['_primaryTitle']} for r in records] }
 
