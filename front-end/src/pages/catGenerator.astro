@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CatAPI from "../components/catAPI/catGenerator.jsx";
+
+---
+
+<Layout client:side>
+    
+	<h1>Random Cats</h1>
+	<CatAPI client:only />
+	
+</Layout>

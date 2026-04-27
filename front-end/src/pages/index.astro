@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TestAPI from "../components/testAPI/testAPI.jsx";
+
+// fetching the data
+// const response = await fetch('http://127.0.0.1:5000/api/data');
+// const data = await response.json();
+
+// Fallback, fake data
+let apiData = {
+	name: "does not work",
+	status: "offline",
+	version: "Unknown",
+	menu_items: ["nothing"],
+};
+
+try {
+	const response = await fetch('http://127.0.0.1:5000/api/data');
+	
+	if (response.ok) {
+		apiData = await response.json();
+	} else {
+		console.warn("Offline, offline", response.status)
+	}
+} catch (error) {
+	console.error("could not reach Python api, using fallback data")
+}
+
+import { mySecret } from '../utils/secret.js';
+console.log(mySecret);
+
+---
+
+<Layout client:rendering>
+	<h1>Landing page</h1>
+	<p>Welcome to {apiData.name}</p>
+
+	<TestAPI client:load info={apiData} />
+
+</Layout>

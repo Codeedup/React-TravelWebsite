@@ -1,0 +1,74 @@
+---
+import Header from "../components/header/Header";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+  </head>
+
+  <body>
+    <Header client:only/>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        <p>Simple footer</p>
+      </footer>
+
+  </body>
+
+  <style>
+    body {
+      /* Grid setup */
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 60px 1fr 50px;
+
+      /* The rest of css */
+      margin: 0;
+      width: 100vw;
+      min-height: 100vh;
+      background-color: #fefae0;
+    }
+
+    Header {
+      /* Grid placement */
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+
+    main {
+      /* Grid placement */
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 2;
+      grid-row-end: 3;
+
+      /* The rest of css */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    footer {
+      /* Grid placement */
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 3;
+      grid-row-end: 4;
+
+      /* The rest of css */
+      background-color: #283618;
+      color: #fefae0;
+      text-align: center;
+    }
+  </style>
+</html>
