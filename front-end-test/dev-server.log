@@ -1,0 +1,16 @@
+
+> city-vibe-explorer-prototype@0.0.1 dev
+> astro dev --host 127.0.0.1 --port 4321
+
+[vite] connected.
+[2m21:31:50[22m [34m[types][39m Generated [2m2ms[22m
+[33m[1m21:31:50[22m [WARN] [content][39m Content config not loaded
+[2m21:31:50[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[42m[1m astro [22m[49m [32mv6.1.1[39m [2mready in[22m 8744 [2mms[22m
+[2m┃[22m Local    [36mhttp://127.0.0.1:4321/[39m
+[2m21:31:50[22m [32mwatching for file changes...[39m
+
+[43m[30m update [39m[49m [33m▶ New version of Astro available: 6.2.1[39m
+  Run [36mnpx @astrojs/upgrade[39m to update
+
+[2m21:32:05[22m [34m[200][39m / [2m30ms[22m
