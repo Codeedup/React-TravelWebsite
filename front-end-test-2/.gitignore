@@ -1,0 +1,11 @@
+# local install/cache output
+.npm-cache/
+node_modules/
+
+# Astro build output
+dist/
+.astro/
+
+# local dev server logs
+dev-server.log
+dev-server.err.log
