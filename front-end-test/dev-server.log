@@ -14,3 +14,16 @@
   Run [36mnpx @astrojs/upgrade[39m to update
 
 [2m21:32:05[22m [34m[200][39m / [2m30ms[22m
+[2m21:32:51[22m [34m[200][39m / [2m13ms[22m
+[2m21:33:07[22m [34m[200][39m / [2m14ms[22m
+[2m21:33:09[22m [34m[vite][39m [32m✨ new dependencies optimized: [33mastro/runtime/client/dev-toolbar/entrypoint.js[32m[39m
+[2m21:33:09[22m [34m[vite][39m [32m✨ optimized dependencies changed. reloading[39m
+[2m21:33:09[22m [34m[200][39m / [2m14ms[22m
+[2m21:43:32[22m [34m[200][39m / [2m14ms[22m
+[2m21:44:15[22m [34m[watch][39m /src/components/HeroFilters.jsx
+[2m21:44:15[22m [34m[watch][39m src/components/HeroFilters.jsx
+[vite] program reload
+[2m21:46:35[22m [34m[watch][39m /src/styles/global.css
+[2m21:46:35[22m [34m[watch][39m src/styles/global.css
+[vite] program reload
+[2m21:46:57[22m [34m[200][39m / [2m45ms[22m

@@ -1,13 +1,12 @@
 :root {
   --accent-blue: #075cf5;
-  --accent-blue-dark: #0447c5;
-  --ink: #08123b;
-  --muted: #43506e;
+  --accent-blue-dark: #034dd6;
+  --ink: #07123d;
+  --muted: #354465;
   --line: #e8ecf5;
   --surface: #ffffff;
-  --soft-blue: #eef6ff;
-  --shadow: 0 18px 45px rgba(20, 32, 75, 0.12);
-  --card-shadow: 0 12px 34px rgba(24, 38, 77, 0.1);
+  --card-shadow: 0 14px 34px rgba(20, 32, 72, 0.1);
+  --bubble-shadow: 0 15px 34px rgba(102, 78, 36, 0.15);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
@@ -24,8 +23,8 @@ body {
   min-width: 320px;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(255, 247, 220, 0.55), transparent 32rem),
-    #ffffff;
+    radial-gradient(circle at 10% 0, rgba(255, 239, 195, 0.55), transparent 28rem),
+    linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
 }
 
 a {
@@ -37,49 +36,70 @@ button {
   font: inherit;
 }
 
+/* Header */
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  width: min(100% - 2.5rem, 1400px);
+  width: min(100% - 2.3rem, 1460px);
   margin: 0 auto;
-  padding: 1.1rem 0 0.75rem;
+  padding: 1rem 0 0.65rem;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.9rem;
-  font-weight: 800;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  gap: 0.85rem;
+  font-weight: 850;
+  font-size: clamp(1.25rem, 1.9vw, 1.72rem);
+  letter-spacing: 0;
 }
 
 .brand-mark {
+  position: relative;
   display: grid;
   place-items: center;
   width: 2.45rem;
   height: 2.45rem;
-  border-radius: 50%;
-  color: #ffffff;
-  background: var(--accent-blue);
+  border-radius: 50% 50% 50% 12%;
+  color: transparent;
+  background: linear-gradient(180deg, #0b66ff, #064fe5);
   box-shadow: 0 8px 18px rgba(7, 92, 245, 0.28);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0;
+  transform: rotate(-45deg);
+}
+
+.brand-mark::before {
+  position: absolute;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  content: "";
+}
+
+.brand-mark::after {
+  position: absolute;
+  bottom: 0.62rem;
+  width: 0.28rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: #ffffff;
+  content: "";
+  transform: rotate(45deg);
 }
 
 .main-nav {
   display: flex;
   align-items: center;
-  gap: clamp(1.25rem, 3vw, 2.7rem);
-  font-weight: 700;
+  gap: clamp(1.25rem, 3vw, 2.8rem);
   color: #202a4f;
+  font-weight: 750;
 }
 
 .nav-link {
   position: relative;
-  padding: 0.65rem 0;
+  padding: 0.75rem 0;
 }
 
 .nav-link.active {
@@ -88,9 +108,9 @@ button {
 
 .nav-link.active::after {
   position: absolute;
-  right: 0;
-  bottom: -0.78rem;
-  left: 0;
+  right: -0.1rem;
+  bottom: -0.72rem;
+  left: -0.1rem;
   height: 4px;
   border-radius: 999px;
   background: var(--accent-blue);
@@ -99,65 +119,82 @@ button {
 
 .page-shell {
   width: min(100% - 2rem, 1480px);
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1.35rem;
 }
 
+/* Hero */
 .hero-banner {
-  /* Layered gradients create the sunny illustrated banner without image assets. */
   position: relative;
   overflow: hidden;
-  min-height: 32rem;
-  padding: 2.5rem 1.5rem 1rem;
-  border-radius: 18px;
+  min-height: 31.2rem;
+  padding: 2.55rem 1.5rem 0.85rem;
+  border-radius: 16px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 246, 215, 0.1)),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.96) 0, rgba(255, 255, 255, 0.68) 17rem, transparent 30rem),
-    linear-gradient(120deg, #ffdf84 0%, #fff2c6 46%, #f9b450 100%);
-  box-shadow: inset 0 -26px 80px rgba(255, 145, 37, 0.16);
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.97) 0, rgba(255, 253, 243, 0.82) 15rem, rgba(255, 244, 205, 0.22) 30rem),
+    radial-gradient(circle at 18% 18%, rgba(255, 217, 116, 0.65), transparent 15rem),
+    radial-gradient(circle at 84% 20%, rgba(255, 180, 66, 0.5), transparent 18rem),
+    linear-gradient(118deg, #ffd773 0%, #fff0bd 45%, #efa044 100%);
+  box-shadow:
+    inset 0 -38px 95px rgba(222, 112, 19, 0.18),
+    0 10px 30px rgba(121, 77, 25, 0.08);
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   max-width: 760px;
   margin: 0 auto 1.25rem;
   text-align: center;
 }
 
 .hero-content h1 {
-  margin: 0 0 0.85rem;
-  font-size: clamp(2.5rem, 5.8vw, 5rem);
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.75rem, 5.4vw, 4.75rem);
   line-height: 0.98;
   letter-spacing: 0;
 }
 
 .hero-content p {
-  max-width: 680px;
+  max-width: 675px;
   margin: 0 auto;
-  color: #314061;
-  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  color: #2f3f62;
+  font-size: clamp(1.05rem, 1.65vw, 1.24rem);
   line-height: 1.45;
 }
 
+/* CSS-only travel decoration */
 .sun-shape {
   position: absolute;
-  top: 7.2rem;
-  left: 4.4rem;
-  width: 4.6rem;
-  height: 4.6rem;
+  top: 7.3rem;
+  left: 4.6rem;
+  width: 4.35rem;
+  height: 4.35rem;
   border-radius: 50%;
-  background: #ffd26b;
+  background: #ffd36d;
   box-shadow:
-    0 0 0 1.8rem rgba(255, 208, 102, 0.14),
-    0 0 0 3.4rem rgba(255, 208, 102, 0.08);
+    0 0 0 1.75rem rgba(255, 206, 96, 0.16),
+    0 0 0 3.45rem rgba(255, 194, 70, 0.08);
+}
+
+.sun-shape::before {
+  position: absolute;
+  inset: -2.2rem;
+  background:
+    linear-gradient(#ffd36d, #ffd36d) center top / 0.24rem 1.1rem no-repeat,
+    linear-gradient(#ffd36d, #ffd36d) center bottom / 0.24rem 1.1rem no-repeat,
+    linear-gradient(90deg, #ffd36d, #ffd36d) left center / 1.1rem 0.24rem no-repeat,
+    linear-gradient(90deg, #ffd36d, #ffd36d) right center / 1.1rem 0.24rem no-repeat;
+  border-radius: 50%;
+  content: "";
+  opacity: 0.55;
 }
 
 .cloud {
   position: absolute;
-  width: 5.6rem;
+  width: 5.8rem;
   height: 1rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.52);
+  background: rgba(255, 255, 255, 0.48);
 }
 
 .cloud::before,
@@ -170,34 +207,34 @@ button {
 }
 
 .cloud::before {
-  left: 1.2rem;
+  left: 1.15rem;
   width: 2rem;
   height: 2rem;
 }
 
 .cloud::after {
-  right: 0.9rem;
-  width: 2.6rem;
-  height: 2.6rem;
+  right: 0.85rem;
+  width: 2.7rem;
+  height: 2.7rem;
 }
 
 .cloud-left {
-  top: 8.6rem;
-  left: 10.8rem;
+  top: 8.65rem;
+  left: 10.7rem;
 }
 
 .cloud-right {
-  top: 11rem;
-  right: 11rem;
+  top: 10rem;
+  right: 10.7rem;
 }
 
 .palm-shape {
   position: absolute;
-  right: 2rem;
-  bottom: 0;
-  width: 8rem;
-  height: 21rem;
-  border-right: 0.55rem solid rgba(176, 99, 21, 0.42);
+  right: 1.7rem;
+  bottom: -0.2rem;
+  width: 8.6rem;
+  height: 22rem;
+  border-right: 0.58rem solid rgba(169, 96, 18, 0.43);
   transform: skewX(-5deg);
 }
 
@@ -206,10 +243,10 @@ button {
   position: absolute;
   top: 2rem;
   right: -0.8rem;
-  width: 8.4rem;
-  height: 3.2rem;
+  width: 8.8rem;
+  height: 3.1rem;
   border-radius: 100% 0 100% 0;
-  background: rgba(224, 129, 31, 0.54);
+  background: rgba(218, 126, 29, 0.58);
   content: "";
   transform: rotate(-20deg);
   transform-origin: right center;
@@ -217,15 +254,45 @@ button {
 
 .palm-shape::after {
   top: 4rem;
-  width: 7rem;
+  width: 7.4rem;
   transform: rotate(-155deg);
 }
 
 .palm-small {
   right: 7.6rem;
-  height: 12rem;
-  width: 5.5rem;
-  opacity: 0.7;
+  height: 12.2rem;
+  width: 5.6rem;
+  opacity: 0.68;
+}
+
+.boat-shape {
+  position: absolute;
+  right: 19.2rem;
+  bottom: 2.65rem;
+  width: 3.1rem;
+  height: 2.1rem;
+  border-bottom: 0.42rem solid rgba(43, 119, 150, 0.46);
+  opacity: 0.72;
+}
+
+.boat-shape::before,
+.boat-shape::after {
+  position: absolute;
+  bottom: 0.42rem;
+  width: 0;
+  height: 0;
+  border-bottom: 1.6rem solid rgba(255, 255, 255, 0.7);
+  content: "";
+}
+
+.boat-shape::before {
+  left: 0.95rem;
+  border-left: 0.65rem solid transparent;
+}
+
+.boat-shape::after {
+  left: 1.62rem;
+  border-right: 0.8rem solid transparent;
 }
 
 .coast-shape {
@@ -233,22 +300,22 @@ button {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 6.2rem;
+  height: 6.6rem;
   background:
-    radial-gradient(ellipse at 74% 120%, rgba(86, 143, 153, 0.46) 0, rgba(86, 143, 153, 0.38) 20%, transparent 45%),
-    radial-gradient(ellipse at 20% 120%, rgba(245, 187, 88, 0.42) 0, rgba(245, 187, 88, 0.28) 32%, transparent 58%);
+    radial-gradient(ellipse at 73% 118%, rgba(74, 136, 150, 0.42) 0, rgba(74, 136, 150, 0.35) 20%, transparent 46%),
+    radial-gradient(ellipse at 20% 118%, rgba(242, 179, 80, 0.45) 0, rgba(242, 179, 80, 0.26) 32%, transparent 60%);
 }
 
 .city-shape {
   position: absolute;
   bottom: 0;
-  width: 24rem;
-  height: 8.5rem;
-  opacity: 0.5;
+  width: 25rem;
+  height: 8.4rem;
+  opacity: 0.52;
   background:
-    linear-gradient(to top, rgba(225, 111, 34, 0.52), rgba(225, 111, 34, 0.2)),
-    repeating-linear-gradient(90deg, transparent 0 2rem, rgba(255, 255, 255, 0.32) 2rem 2.25rem);
-  clip-path: polygon(0 100%, 0 40%, 8% 40%, 8% 22%, 11% 8%, 14% 22%, 14% 42%, 24% 42%, 24% 56%, 32% 56%, 32% 48%, 39% 48%, 39% 62%, 49% 62%, 49% 52%, 58% 52%, 58% 70%, 66% 70%, 66% 50%, 73% 50%, 73% 72%, 84% 72%, 84% 56%, 92% 56%, 92% 100%);
+    linear-gradient(to top, rgba(224, 110, 32, 0.54), rgba(249, 165, 62, 0.18)),
+    repeating-linear-gradient(90deg, transparent 0 1.9rem, rgba(255, 255, 255, 0.33) 1.9rem 2.18rem);
+  clip-path: polygon(0 100%, 0 44%, 8% 44%, 8% 27%, 11% 9%, 14% 27%, 14% 42%, 24% 42%, 24% 56%, 32% 56%, 32% 48%, 39% 48%, 39% 62%, 49% 62%, 49% 52%, 58% 52%, 58% 70%, 66% 70%, 66% 50%, 73% 50%, 73% 72%, 84% 72%, 84% 56%, 92% 56%, 92% 100%);
 }
 
 .city-left {
@@ -256,14 +323,15 @@ button {
 }
 
 .city-right {
-  right: 5rem;
+  right: 5.2rem;
   width: 18rem;
   transform: scaleX(-1);
 }
 
+/* Filter bubbles */
 .hero-filter-panel {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   width: min(100%, 780px);
   margin: 0 auto;
 }
@@ -271,7 +339,7 @@ button {
 .filter-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.95rem;
+  gap: 0.9rem 0.95rem;
 }
 
 .filter-wrap {
@@ -284,13 +352,14 @@ button {
   align-items: center;
   gap: 1rem;
   width: 100%;
-  min-height: 5.2rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.88);
-  border-radius: 28px;
+  min-height: 5.35rem;
+  padding: 0.95rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 26px;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: var(--card-shadow);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.91));
+  box-shadow: var(--bubble-shadow);
   cursor: pointer;
   text-align: left;
   transition:
@@ -301,89 +370,103 @@ button {
 
 .filter-card:hover,
 .filter-card.open {
-  border-color: rgba(7, 92, 245, 0.22);
-  box-shadow: 0 16px 38px rgba(24, 38, 77, 0.16);
+  border-color: rgba(7, 92, 245, 0.24);
+  box-shadow: 0 18px 40px rgba(64, 58, 43, 0.18);
   transform: translateY(-2px);
 }
 
 .filter-icon {
   display: grid;
   place-items: center;
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 3.15rem;
+  height: 3.15rem;
   border-radius: 50%;
-  font-weight: 900;
   font-size: 1.15rem;
+  font-weight: 900;
 }
 
 .filter-icon.green {
-  color: #0c7d34;
-  background: #daf7df;
+  color: #117d38;
+  background: #dcf6df;
+  box-shadow: inset 0 0 0 3px rgba(17, 125, 56, 0.1);
 }
 
 .filter-icon.pink {
-  color: #e94f82;
+  color: #e54f82;
   background: #ffe3ee;
+  box-shadow: inset 0 0 0 3px rgba(229, 79, 130, 0.1);
 }
 
 .filter-icon.purple {
-  color: #7250c8;
-  background: #efe7ff;
+  color: #6f52c8;
+  background: #eee7ff;
+  box-shadow: inset 0 0 0 3px rgba(111, 82, 200, 0.1);
 }
 
 .filter-icon.orange {
-  color: #f59b00;
-  background: #fff0c7;
+  color: #f39a00;
+  background: #fff0c8;
+  box-shadow: inset 0 0 0 3px rgba(243, 154, 0, 0.12);
 }
 
 .filter-icon.blue {
-  color: #1e73da;
-  background: #dfeeff;
+  color: #1671d4;
+  background: #deefff;
+  box-shadow: inset 0 0 0 3px rgba(22, 113, 212, 0.1);
 }
 
 .filter-icon.coral {
-  color: #e8631b;
-  background: #ffe8d8;
+  color: #e7611d;
+  background: #ffe7d8;
+  box-shadow: inset 0 0 0 3px rgba(231, 97, 29, 0.1);
 }
 
 .filter-copy {
   display: grid;
-  gap: 0.2rem;
+  gap: 0.18rem;
+  min-width: 0;
 }
 
 .filter-label {
-  color: #273655;
-  font-weight: 700;
+  color: #2c3958;
+  font-size: 0.98rem;
+  font-weight: 750;
 }
 
 .filter-value {
-  font-size: 1.16rem;
-  font-weight: 700;
+  overflow: hidden;
+  font-size: 1.14rem;
+  font-weight: 760;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .filter-arrow {
-  color: #63708e;
-  font-weight: 900;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-right: 2px solid #64708d;
+  border-bottom: 2px solid #64708d;
+  transform: rotate(45deg) translateY(-0.15rem);
 }
 
 .filter-menu {
   position: absolute;
-  z-index: 10;
+  z-index: 20;
   top: calc(100% + 0.45rem);
-  left: 0.7rem;
-  right: 0.7rem;
+  left: 0.6rem;
+  right: 0.6rem;
   overflow: hidden;
-  padding: 0.45rem;
+  padding: 0.4rem;
   border: 1px solid var(--line);
-  border-radius: 18px;
-  background: #ffffff;
-  box-shadow: 0 18px 40px rgba(22, 35, 72, 0.18);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 38px rgba(16, 30, 68, 0.18);
 }
 
 .filter-option {
   display: block;
   width: 100%;
-  padding: 0.72rem 0.85rem;
+  padding: 0.68rem 0.78rem;
   border: 0;
   border-radius: 12px;
   color: #263453;
@@ -401,35 +484,76 @@ button {
 .hero-actions {
   display: grid;
   justify-items: center;
-  gap: 0.55rem;
-  margin-top: 1rem;
+  gap: 0.48rem;
+  margin-top: 0.95rem;
 }
 
 .primary-action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
-  min-width: 22rem;
-  min-height: 3.4rem;
+  gap: 0.9rem;
+  min-width: 21.5rem;
+  min-height: 3.35rem;
   border: 0;
   border-radius: 12px;
   color: #ffffff;
-  background: linear-gradient(180deg, #0868ff, #034fe8);
-  box-shadow: 0 14px 24px rgba(7, 92, 245, 0.25);
+  background: linear-gradient(180deg, #0968ff, #034fe7);
+  box-shadow:
+    0 14px 24px rgba(7, 92, 245, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: 1.3rem;
+  font-weight: 850;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.primary-action:hover {
+  background: linear-gradient(180deg, #1472ff, var(--accent-blue-dark));
+  box-shadow: 0 18px 28px rgba(7, 92, 245, 0.34);
+  transform: translateY(-1px);
+}
+
+.search-icon {
+  position: relative;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+}
+
+.search-icon::after {
+  position: absolute;
+  right: -0.42rem;
+  bottom: -0.34rem;
+  width: 0.7rem;
+  height: 0.2rem;
+  border-radius: 999px;
+  background: #ffffff;
+  content: "";
+  transform: rotate(45deg);
 }
 
 .secondary-action {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   color: var(--accent-blue);
-  font-weight: 700;
+  font-weight: 720;
 }
 
+.secondary-arrow {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* City cards */
 .city-preview-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -439,22 +563,21 @@ button {
 
 .city-card {
   display: grid;
-  grid-template-columns: minmax(13rem, 0.95fr) 1fr;
-  gap: 1.35rem;
-  min-height: 13.2rem;
+  grid-template-columns: minmax(12.5rem, 0.98fr) minmax(11.5rem, 0.82fr);
+  gap: 1.25rem;
+  min-height: 13.1rem;
   padding: 0.8rem;
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  border: 1px solid #e7ebf4;
+  border-radius: 13px;
   background: #ffffff;
-  box-shadow: 0 8px 28px rgba(24, 38, 77, 0.08);
+  box-shadow: var(--card-shadow);
 }
 
 .city-image {
-  /* Each city uses the same placeholder structure with a different color mood. */
   position: relative;
   overflow: hidden;
-  min-height: 11.6rem;
-  border-radius: 9px;
+  min-height: 11.65rem;
+  border-radius: 8px;
   background: #d9e9f9;
 }
 
@@ -462,26 +585,27 @@ button {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 45%),
-    radial-gradient(circle at 18% 25%, rgba(255, 255, 255, 0.82) 0 1.8rem, transparent 1.9rem);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 45%),
+    radial-gradient(circle at 18% 21%, rgba(255, 255, 255, 0.84) 0 1.5rem, transparent 1.6rem),
+    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.56) 0 1.2rem, transparent 1.3rem);
   content: "";
 }
 
 .city-image.lisbon {
   background:
-    linear-gradient(180deg, #99d8ff 0 40%, #f4d088 40% 58%, #d96f3d 58%),
+    linear-gradient(180deg, #9cd7ff 0 40%, #f4d78c 40% 57%, #d06a3a 57%),
     linear-gradient(90deg, #f7fafc, #e96f3e);
 }
 
 .city-image.tokyo {
   background:
-    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.95) 0 1.6rem, transparent 1.7rem),
-    linear-gradient(180deg, #aad8ff 0 45%, #7aa6c8 45% 52%, #1b5b8f 52%);
+    radial-gradient(circle at 73% 18%, rgba(255, 255, 255, 0.92) 0 1.7rem, transparent 1.8rem),
+    linear-gradient(180deg, #aedbff 0 43%, #80aac9 43% 52%, #255d8e 52%);
 }
 
 .city-image.prague {
   background:
-    linear-gradient(180deg, #9ed2ff 0 38%, #d5e5ef 38% 50%, #a94f35 50%),
+    linear-gradient(180deg, #a8d7ff 0 38%, #dfe8ed 38% 49%, #a85036 49%),
     linear-gradient(90deg, #2d5a67, #cf6b45);
 }
 
@@ -490,33 +614,35 @@ button {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 50%;
+  height: 52%;
   background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.74) 0 1.8rem, transparent 1.8rem 2.55rem),
-    linear-gradient(to top, rgba(36, 52, 83, 0.18), transparent);
-  clip-path: polygon(0 100%, 0 38%, 10% 38%, 10% 24%, 18% 24%, 18% 46%, 26% 46%, 26% 28%, 35% 28%, 35% 52%, 43% 52%, 43% 34%, 51% 34%, 51% 18%, 56% 18%, 56% 100%, 62% 100%, 62% 44%, 72% 44%, 72% 26%, 82% 26%, 82% 52%, 90% 52%, 90% 38%, 100% 38%, 100% 100%);
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0 1.7rem, transparent 1.7rem 2.45rem),
+    linear-gradient(to top, rgba(35, 48, 80, 0.2), transparent);
+  clip-path: polygon(0 100%, 0 40%, 9% 40%, 9% 25%, 17% 25%, 17% 46%, 26% 46%, 26% 30%, 34% 30%, 34% 54%, 43% 54%, 43% 35%, 50% 35%, 50% 18%, 56% 18%, 56% 100%, 62% 100%, 62% 45%, 72% 45%, 72% 27%, 82% 27%, 82% 53%, 90% 53%, 90% 40%, 100% 40%, 100% 100%);
 }
 
 .city-details {
-  padding: 0.45rem 0.2rem;
+  min-width: 0;
+  padding: 0.45rem 0.25rem;
 }
 
 .city-details h2 {
   margin: 0;
-  font-size: 1.35rem;
+  font-size: 1.34rem;
   line-height: 1.1;
+  letter-spacing: 0;
 }
 
 .country {
-  margin: 0.25rem 0 1rem;
+  margin: 0.25rem 0 1.02rem;
   color: var(--accent-blue);
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1.02rem;
+  font-weight: 720;
 }
 
 .city-stats {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.64rem;
   margin: 0;
 }
 
@@ -524,34 +650,40 @@ button {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  min-width: 0;
   color: #25314f;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .stat-row dt {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  font-weight: 700;
+  flex: 0 0 auto;
+  font-weight: 720;
 }
 
 .stat-row dd {
+  min-width: 0;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .stat-icon {
   display: grid;
   place-items: center;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.2rem;
+  height: 1.2rem;
   border-radius: 50%;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 900;
 }
 
 .stat-icon.cost {
-  color: #0f8d3f;
-  border: 2px solid #0f8d3f;
+  color: #10853c;
+  border: 2px solid #10853c;
 }
 
 .stat-icon.vibe {
@@ -560,8 +692,8 @@ button {
 }
 
 .stat-icon.language {
-  color: #7250c8;
-  border: 2px solid #7250c8;
+  color: #7051c5;
+  border: 2px solid #7051c5;
 }
 
 .stat-icon.weather {
@@ -569,16 +701,17 @@ button {
   border: 2px solid #f59b00;
 }
 
+/* Feature strip */
 .feature-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   align-items: center;
   margin: 0 auto;
-  padding: 1.1rem 2.5rem;
-  border-radius: 24px;
-  background: linear-gradient(180deg, #f4f9ff, #edf5ff);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  padding: 1.08rem 2.2rem;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #f4f9ff, #eef6ff);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .feature-item {
@@ -586,39 +719,56 @@ button {
   align-items: center;
   justify-content: center;
   gap: 1.15rem;
+  min-width: 0;
 }
 
 .feature-icon {
   display: grid;
   place-items: center;
-  min-width: 3.5rem;
-  height: 3.5rem;
+  flex: 0 0 3.45rem;
+  height: 3.45rem;
   color: var(--accent-blue);
+  font-size: 1.08rem;
   font-weight: 900;
-  font-size: 1.1rem;
 }
 
 .feature-item h2 {
-  margin: 0 0 0.25rem;
-  font-size: 1.18rem;
+  margin: 0 0 0.28rem;
+  font-size: 1.12rem;
+  line-height: 1.1;
 }
 
 .feature-item p {
   margin: 0;
   color: #314061;
+  line-height: 1.35;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1180px) {
+  .city-card {
+    grid-template-columns: 1fr;
+  }
+
+  .city-image {
+    min-height: 10.5rem;
+  }
+}
+
+@media (max-width: 980px) {
   .city-preview-grid {
     grid-template-columns: 1fr;
   }
 
   .city-card {
-    grid-template-columns: minmax(14rem, 0.45fr) 1fr;
+    grid-template-columns: minmax(14rem, 0.48fr) 1fr;
   }
 
   .feature-strip {
     grid-template-columns: 1fr;
+  }
+
+  .feature-item {
+    justify-content: flex-start;
   }
 }
 
@@ -626,12 +776,12 @@ button {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.75rem;
   }
 
   .main-nav {
     flex-wrap: wrap;
-    gap: 0.8rem 1.25rem;
+    gap: 0.55rem 1.25rem;
   }
 
   .nav-link.active::after {
@@ -647,20 +797,30 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .sun-shape {
+    opacity: 0.55;
+  }
+
   .cloud-right,
   .palm-shape,
+  .boat-shape,
   .city-right {
-    opacity: 0.35;
+    opacity: 0.34;
   }
 }
 
 @media (max-width: 620px) {
+  .site-header,
   .page-shell {
     width: min(100% - 1rem, 1480px);
   }
 
+  .brand {
+    font-size: 1.18rem;
+  }
+
   .hero-banner {
-    border-radius: 14px;
+    border-radius: 13px;
     padding-inline: 0.8rem;
   }
 
@@ -670,12 +830,13 @@ button {
   }
 
   .filter-card {
-    min-height: 4.75rem;
+    min-height: 4.85rem;
   }
 
   .primary-action {
-    min-width: 100%;
-    font-size: 1.1rem;
+    width: min(100%, 21.5rem);
+    min-width: 0;
+    font-size: 1.08rem;
   }
 
   .city-image {
@@ -683,11 +844,8 @@ button {
   }
 
   .feature-strip {
+    gap: 1rem;
     padding: 1rem;
     border-radius: 16px;
-  }
-
-  .feature-item {
-    justify-content: flex-start;
   }
 }

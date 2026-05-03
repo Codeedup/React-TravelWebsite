@@ -1,8 +1,8 @@
 const rowIcons = {
   Cost: "$",
   Vibe: ":)",
-  Language: "...",
-  Weather: "*",
+  Language: "A",
+  Weather: "o",
 };
 
 export default function CityCard({ city }) {
@@ -22,7 +22,7 @@ export default function CityCard({ city }) {
         <p className="country">{city.country}</p>
 
         <dl className="city-stats">
-          {Object.entries(city.stats).map(([label, value]) => (
+          {city.stats.map(({ label, value }) => (
             <div className="stat-row" key={label}>
               <dt>
                 <span className={`stat-icon ${label.toLowerCase()}`} aria-hidden="true">

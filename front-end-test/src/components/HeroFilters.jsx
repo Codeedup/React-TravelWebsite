@@ -15,19 +15,19 @@ const filters = [
   },
   {
     label: "Language",
-    icon: "...",
+    icon: "A",
     accent: "purple",
     options: ["Any", "English", "Portuguese", "Japanese", "Czech"],
   },
   {
     label: "Weather",
-    icon: "*",
+    icon: "o",
     accent: "orange",
     options: ["Any", "Mild", "Sunny", "Four Seasons", "Cloudy"],
   },
   {
     label: "Region",
-    icon: "O",
+    icon: "#",
     accent: "blue",
     options: ["Any", "Europe", "Asia", "Americas"],
   },
@@ -86,9 +86,7 @@ export default function HeroFilters() {
                   <span className="filter-label">{filter.label}</span>
                   <span className="filter-value">{selectedValues[filter.label]}</span>
                 </span>
-                <span className="filter-arrow" aria-hidden="true">
-                  v
-                </span>
+                <span className="filter-arrow" aria-hidden="true"></span>
               </button>
 
               {isOpen && (
@@ -118,12 +116,12 @@ export default function HeroFilters() {
 
       <div className="hero-actions">
         <button className="primary-action" type="button">
-          <span aria-hidden="true">Q</span>
+          <span className="search-icon" aria-hidden="true"></span>
           Compare Cities
         </button>
         <a className="secondary-action" href="/">
           Browse all cities
-          <span aria-hidden="true">›</span>
+          <span className="secondary-arrow" aria-hidden="true"></span>
         </a>
       </div>
     </div>
