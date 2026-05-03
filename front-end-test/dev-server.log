@@ -27,3 +27,15 @@
 [2m21:46:35[22m [34m[watch][39m src/styles/global.css
 [vite] program reload
 [2m21:46:57[22m [34m[200][39m / [2m45ms[22m
+[2m21:47:56[22m [34m[200][39m / [2m11ms[22m
+[2m21:48:16[22m [34m[200][39m / [2m39ms[22m
+[2m21:52:18[22m [34m[watch][39m /src/components/HeroFilters.jsx
+[2m21:52:18[22m [34m[watch][39m src/components/HeroFilters.jsx
+[vite] program reload
+[2m21:52:44[22m [34m[watch][39m /src/styles/global.css
+[2m21:52:44[22m [34m[watch][39m src/styles/global.css
+[vite] program reload
+[2m21:53:23[22m [34m[200][39m / [2m47ms[22m
+[2m21:54:37[22m [34m[watch][39m /src/components/HeroFilters.jsx
+[2m21:54:37[22m [34m[watch][39m src/components/HeroFilters.jsx
+[vite] program reload

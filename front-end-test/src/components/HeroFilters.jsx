@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const filters = [
   {
@@ -39,7 +39,56 @@ const filters = [
   },
 ];
 
+function getSimilarityScore(option, searchTerm) {
+  const optionText = option.toLowerCase();
+  const query = searchTerm.trim().toLowerCase();
+
+  if (!query) {
+    return 1;
+  }
+
+  if (optionText === query) {
+    return 100;
+  }
+
+  if (optionText.startsWith(query)) {
+    return 80;
+  }
+
+  if (optionText.includes(query)) {
+    return 60;
+  }
+
+  // Simple fuzzy fallback: count query letters that appear in order.
+  let optionIndex = 0;
+  let matches = 0;
+
+  for (const letter of query) {
+    const nextMatch = optionText.indexOf(letter, optionIndex);
+
+    if (nextMatch !== -1) {
+      matches += 1;
+      optionIndex = nextMatch + 1;
+    }
+  }
+
+  return matches / query.length;
+}
+
+function getFilteredOptions(options, searchTerm) {
+  return options
+    .map((option) => ({
+      option,
+      score: getSimilarityScore(option, searchTerm),
+    }))
+    .filter(({ score }) => score > 0.35)
+    .sort((first, second) => second.score - first.score)
+    .map(({ option }) => option);
+}
+
 export default function HeroFilters() {
+  const filterPanelRef = useRef(null);
+
   // Store the visible choice for each filter card.
   const [selectedValues, setSelectedValues] = useState(
     filters.reduce((values, filter) => {
@@ -50,6 +99,24 @@ export default function HeroFilters() {
 
   // Track the one dropdown menu that is currently open.
   const [openFilter, setOpenFilter] = useState(null);
+  const [searchTerms, setSearchTerms] = useState({});
+
+  useEffect(() => {
+    function closeDropdownOnOutsideClick(event) {
+      if (
+        filterPanelRef.current &&
+        !filterPanelRef.current.contains(event.target)
+      ) {
+        setOpenFilter(null);
+      }
+    }
+
+    document.addEventListener("pointerdown", closeDropdownOnOutsideClick);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeDropdownOnOutsideClick);
+    };
+  }, []);
 
   function toggleFilter(label) {
     setOpenFilter((currentFilter) => (currentFilter === label ? null : label));
@@ -64,11 +131,20 @@ export default function HeroFilters() {
     setOpenFilter(null);
   }
 
+  function updateSearchTerm(label, value) {
+    setSearchTerms((currentTerms) => ({
+      ...currentTerms,
+      [label]: value,
+    }));
+  }
+
   return (
-    <div className="hero-filter-panel">
+    <div className="hero-filter-panel" ref={filterPanelRef}>
       <div className="filter-grid" aria-label="City search filters">
         {filters.map((filter) => {
           const isOpen = openFilter === filter.label;
+          const searchTerm = searchTerms[filter.label] || "";
+          const visibleOptions = getFilteredOptions(filter.options, searchTerm);
 
           return (
             <div className="filter-wrap" key={filter.label}>
@@ -90,23 +166,43 @@ export default function HeroFilters() {
               </button>
 
               {isOpen && (
-                <div className="filter-menu" role="listbox">
-                  {filter.options.map((option) => (
-                    <button
-                      className={
-                        selectedValues[filter.label] === option
-                          ? "filter-option selected"
-                          : "filter-option"
+                <div className="filter-menu">
+                  <label className="filter-search-label">
+                    <span className="sr-only">Search {filter.label} options</span>
+                    <input
+                      className="filter-search"
+                      type="text"
+                      value={searchTerm}
+                      placeholder={`Type ${filter.label.toLowerCase()}...`}
+                      onChange={(event) =>
+                        updateSearchTerm(filter.label, event.target.value)
                       }
-                      key={option}
-                      role="option"
-                      aria-selected={selectedValues[filter.label] === option}
-                      type="button"
-                      onClick={() => chooseOption(filter.label, option)}
-                    >
-                      {option}
-                    </button>
-                  ))}
+                      autoFocus
+                    />
+                  </label>
+
+                  <div className="filter-option-list" role="listbox">
+                    {visibleOptions.length > 0 ? (
+                      visibleOptions.map((option) => (
+                        <button
+                          className={
+                            selectedValues[filter.label] === option
+                              ? "filter-option selected"
+                              : "filter-option"
+                          }
+                          key={option}
+                          role="option"
+                          aria-selected={selectedValues[filter.label] === option}
+                          type="button"
+                          onClick={() => chooseOption(filter.label, option)}
+                        >
+                          {option}
+                        </button>
+                      ))
+                    ) : (
+                      <p className="empty-options">No close matches</p>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
