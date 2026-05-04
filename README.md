@@ -73,4 +73,8 @@ I also used some parts from the previous project -> https://git.arts.ac.uk/24032
 For free APIs: https://free-apis.github.io/#/browse <br><br>
 Cataas API: https://cataas.com <br><br>
 Json specification: https://www.json.org/json-en.html <br><br>
-For fetching data using API: https://docs.astro.build/en/guides/data-fetching/
+For fetching data using API: https://docs.astro.build/en/guides/data-fetching/ <br><br>
+Documentation for SQLAlchemy: https://docs.sqlalchemy.org/en/20/orm/quickstart.html <br><br>
+Apis I used for the travel_helper:
+    1) Countries api - free key - https://restcountries.com
+    2) Cities api - free key - https://documenter.getpostman.com/view/1134062/T1LJjU52
