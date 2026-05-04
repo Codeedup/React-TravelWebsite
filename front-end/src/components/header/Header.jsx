@@ -41,6 +41,10 @@ export default function Header(props) {
             <a href="/classExercise">Class exercise</a>
           </li>
 
+          <li>
+            <a href="/travelPlanner">Travel Planner</a>
+          </li>
+
         </ul>
       </div>
     );
