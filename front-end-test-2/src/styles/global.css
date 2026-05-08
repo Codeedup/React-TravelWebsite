@@ -547,6 +547,47 @@ button {
   background: var(--blue-soft);
 }
 
+/* About */
+.about-shell {
+  display: grid;
+  min-height: calc(100vh - 3.65rem);
+  padding: 3rem 0;
+  place-items: start center;
+}
+
+.about-panel {
+  width: min(100%, 760px);
+  padding: clamp(1.4rem, 4vw, 2.4rem);
+  border: 1px solid #dbe5f2;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: var(--shadow);
+}
+
+.about-kicker {
+  margin: 0 0 0.45rem;
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-panel h1 {
+  margin: 0 0 0.8rem;
+  color: var(--ink);
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.about-panel p:last-child {
+  margin: 0;
+  color: #465677;
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.65;
+}
+
 /* City cards */
 .city-grid {
   display: grid;

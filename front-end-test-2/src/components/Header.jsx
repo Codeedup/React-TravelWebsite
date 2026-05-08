@@ -1,6 +1,11 @@
-const navLinks = ["Home", "Compare", "About", "Data Sources"];
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Compare", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Data Sources", href: "/" },
+];
 
-export default function Header() {
+export default function Header({ currentPage = "Home" }) {
   return (
     <header className="site-header">
       <div className="header-inner">
@@ -12,11 +17,11 @@ export default function Header() {
         <nav className="main-nav" aria-label="Main navigation">
           {navLinks.map((link) => (
             <a
-              className={link === "Home" ? "nav-link active" : "nav-link"}
-              href="/"
-              key={link}
+              className={link.label === currentPage ? "nav-link active" : "nav-link"}
+              href={link.href}
+              key={link.label}
             >
-              {link}
+              {link.label}
             </a>
           ))}
         </nav>
