@@ -1,192 +1,88 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-const filterRows = [
-  {
-    label: "Cost",
-    icon: "$",
-    accent: "cost",
-    options: ["Any", "Low", "Moderate", "High"],
-    defaultValue: "Any",
-  },
-  {
-    label: "Vibe",
-    icon: ":)",
-    accent: "vibe",
-    options: ["Any", "Historic", "Modern", "Relaxed", "Energetic"],
-    defaultValue: "Modern",
-  },
-  {
-    label: "Weather",
-    icon: "o",
-    accent: "weather",
-    options: ["Any", "Warm", "Mild", "Sunny", "Four Seasons"],
-    defaultValue: "Mild",
-  },
-  {
-    label: "Region",
-    icon: "#",
-    accent: "region",
-    options: ["Any", "Europe", "Asia", "Americas", "Africa"],
-    defaultValue: "Europe",
-  },
-  {
-    label: "Currency",
-    icon: "$",
-    accent: "currency",
-    options: ["Any", "EUR", "JPY", "CZK", "GBP"],
-    defaultValue: "Any",
-  },
+const activities = [
+  { name: "Hiking", category: "Nature/Adventure" },
+  { name: "Surfing", category: "Coastal/Sport" },
+  { name: "Museum Hopping", category: "Culture/History" },
+  { name: "Wine Tasting", category: "Culinary/Relaxing" },
+  { name: "Scuba Diving", category: "Adventure/Ocean" },
+  { name: "Skiing/Snowboarding", category: "Winter/Sport" },
+  { name: "Street Food Tours", category: "Culinary/Local" },
+  { name: "Stargazing", category: "Nature/Quiet" },
+  { name: "Historical Walking Tours", category: "Educational/Urban" },
+  { name: "Nightlife & Clubbing", category: "Social/High-Energy" },
 ];
 
-const languageOptions = ["Any", "English", "Spanish", "French", "Portuguese", "Japanese"];
-const moreLanguageOptions = ["Czech", "German", "Italian"];
-
 export default function HeroFilters() {
-  const moreMenuRef = useRef(null);
-  const [selectedValues, setSelectedValues] = useState(() => {
-    const initialValues = {};
+  const [activitySearch, setActivitySearch] = useState("");
+  const [selectedActivity, setSelectedActivity] = useState("");
 
-    filterRows.forEach((row) => {
-      initialValues[row.label] = row.defaultValue;
-    });
-
-    initialValues.Language = "English";
-    return initialValues;
+  const normalizedSearch = activitySearch.trim().toLowerCase();
+  const matchingActivities = activities.filter((activity) => {
+    const searchableText = `${activity.name} ${activity.category}`.toLowerCase();
+    return searchableText.includes(normalizedSearch);
   });
-  const [languageSearch, setLanguageSearch] = useState("");
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
-  useEffect(() => {
-    function closeMoreMenu(event) {
-      if (moreMenuRef.current && !moreMenuRef.current.contains(event.target)) {
-        setIsMoreOpen(false);
-      }
-    }
-
-    document.addEventListener("pointerdown", closeMoreMenu);
-
-    return () => {
-      document.removeEventListener("pointerdown", closeMoreMenu);
-    };
-  }, []);
-
-  function chooseValue(label, value) {
-    setSelectedValues((currentValues) => ({
-      ...currentValues,
-      [label]: value,
-    }));
-    setIsMoreOpen(false);
+  function chooseActivity(activityName) {
+    setSelectedActivity(activityName);
   }
 
-  const matchingLanguages = moreLanguageOptions.filter((language) =>
-    language.toLowerCase().includes(languageSearch.trim().toLowerCase())
-  );
+  function findMatchingCities() {
+    const resultsPath = selectedActivity
+      ? `/results?activity=${encodeURIComponent(selectedActivity)}`
+      : "/results";
+
+    window.location.href = resultsPath;
+  }
 
   return (
-    <section className="filter-panel" aria-label="City search filters">
-      {filterRows.map((row) => (
-        <div className="filter-row" key={row.label}>
-          <div className="filter-heading">
-            <span className={`row-icon ${row.accent}`} aria-hidden="true">
-              {row.icon}
-            </span>
-            <span>{row.label}</span>
-          </div>
-
-          <div className="segmented-options">
-            {row.options.map((option) => (
-              <button
-                className={
-                  selectedValues[row.label] === option
-                    ? "segment-button selected"
-                    : "segment-button"
-                }
-                key={option}
-                type="button"
-                onClick={() => chooseValue(row.label, option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-      ))}
-
-      <div className="filter-row language-row">
+    <section className="filter-panel" aria-label="Activity search filter">
+      <div className="filter-row activity-row">
         <div className="filter-heading">
-          <span className="row-icon language" aria-hidden="true">
+          <span className="row-icon activity" aria-hidden="true">
             A
           </span>
-          <span>Language</span>
+          <span>Activities</span>
         </div>
 
-        <div className="language-controls">
-          <label className="language-search-wrap">
-            <span className="sr-only">Search language</span>
+        <div className="activity-controls">
+          <label className="activity-search-wrap">
+            <span className="sr-only">Search activities</span>
             <input
-              className="language-search"
+              className="activity-search"
               type="text"
-              value={languageSearch}
-              placeholder="Search language or choose Any..."
-              onChange={(event) => setLanguageSearch(event.target.value)}
+              value={activitySearch}
+              placeholder="Search activities..."
+              onChange={(event) => setActivitySearch(event.target.value)}
             />
             <span className="search-mini-icon" aria-hidden="true"></span>
           </label>
 
-          <span className="popular-label">Popular</span>
-
-          <div className="language-chip-row">
-            {languageOptions.map((option) => (
+          <div className="activity-chip-row" aria-label="Activity options">
+            {matchingActivities.map((activity) => (
               <button
                 className={
-                  selectedValues.Language === option
-                    ? "language-chip selected"
-                    : "language-chip"
+                  selectedActivity === activity.name
+                    ? "activity-chip selected"
+                    : "activity-chip"
                 }
-                key={option}
+                key={activity.name}
                 type="button"
-                onClick={() => chooseValue("Language", option)}
+                onClick={() => chooseActivity(activity.name)}
               >
-                {option}
+                <span>{activity.name}</span>
+                <span className="activity-category">{activity.category}</span>
               </button>
             ))}
 
-            <div className="more-menu-wrap" ref={moreMenuRef}>
-              <button
-                className="language-chip more-chip"
-                type="button"
-                aria-expanded={isMoreOpen}
-                onClick={() => setIsMoreOpen((currentValue) => !currentValue)}
-              >
-                More
-                <span className="more-arrow" aria-hidden="true"></span>
-              </button>
-
-              {isMoreOpen && (
-                <div className="more-menu">
-                  {(languageSearch ? matchingLanguages : moreLanguageOptions).map(
-                    (language) => (
-                      <button
-                        className="more-option"
-                        key={language}
-                        type="button"
-                        onClick={() => chooseValue("Language", language)}
-                      >
-                        {language}
-                      </button>
-                    )
-                  )}
-                  {languageSearch && matchingLanguages.length === 0 && (
-                    <p className="empty-menu-text">No language matches</p>
-                  )}
-                </div>
-              )}
-            </div>
+            {matchingActivities.length === 0 && (
+              <p className="empty-filter-text">No activity matches</p>
+            )}
           </div>
         </div>
       </div>
 
-      <button className="match-button" type="button">
+      <button className="match-button" type="button" onClick={findMatchingCities}>
         <span className="button-search-icon" aria-hidden="true"></span>
         Find Matching Cities
       </button>
