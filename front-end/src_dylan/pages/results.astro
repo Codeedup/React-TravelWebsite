@@ -1,0 +1,25 @@
+---
+import Header from "../components/Header.jsx";
+import ResultsList from "../components/ResultsList.jsx";
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="City Vibe Explorer mock results for activity-based city matching."
+    />
+    <title>City Matches | City Vibe Explorer</title>
+  </head>
+  <body>
+    <Header currentPage="" client:load />
+
+    <main class="page-shell results-shell">
+      <ResultsList client:load />
+      <a class="back-link" href="/">Back to activities</a>
+    </main>
+  </body>
+</html>
