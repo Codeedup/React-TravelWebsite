@@ -1,86 +1,240 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const activities = [
-  { name: "Hiking", category: "Nature/Adventure" },
-  { name: "Surfing", category: "Coastal/Sport" },
-  { name: "Museum Hopping", category: "Culture/History" },
-  { name: "Wine Tasting", category: "Culinary/Relaxing" },
-  { name: "Scuba Diving", category: "Adventure/Ocean" },
-  { name: "Skiing/Snowboarding", category: "Winter/Sport" },
-  { name: "Street Food Tours", category: "Culinary/Local" },
-  { name: "Stargazing", category: "Nature/Quiet" },
-  { name: "Historical Walking Tours", category: "Educational/Urban" },
-  { name: "Nightlife & Clubbing", category: "Social/High-Energy" },
+const API_BASE_URL = "http://127.0.0.1:5001";
+
+const filterConfig = [
+  { label: "Cost", key: "cost", icon: "$", accent: "green" },
+  { label: "Weather", key: "weather", icon: "W", accent: "orange" },
+  { label: "Activities", key: "activity", icon: "A", accent: "blue" },
+  { label: "Vibe", key: "vibe", icon: "V", accent: "purple" },
 ];
 
+const emptyOptions = filterConfig.reduce((options, filter) => {
+  options[filter.key] = ["Any"];
+  return options;
+}, {});
+
+const emptySelections = filterConfig.reduce((selections, filter) => {
+  selections[filter.key] = "Any";
+  return selections;
+}, {});
+
+function getSimilarityScore(option, searchTerm) {
+  const optionText = option.toLowerCase();
+  const query = searchTerm.trim().toLowerCase();
+
+  if (!query) {
+    return 1;
+  }
+
+  if (optionText === query) {
+    return 100;
+  }
+
+  if (optionText.startsWith(query)) {
+    return 80;
+  }
+
+  if (optionText.includes(query)) {
+    return 60;
+  }
+
+  let optionIndex = 0;
+  let matches = 0;
+
+  for (const letter of query) {
+    const nextMatch = optionText.indexOf(letter, optionIndex);
+
+    if (nextMatch !== -1) {
+      matches += 1;
+      optionIndex = nextMatch + 1;
+    }
+  }
+
+  return matches / query.length;
+}
+
+function getFilteredOptions(options, searchTerm) {
+  return options
+    .map((option) => ({
+      option,
+      score: getSimilarityScore(option, searchTerm),
+    }))
+    .filter(({ score }) => score > 0.35)
+    .sort((first, second) => second.score - first.score)
+    .map(({ option }) => option);
+}
+
+function normalizeOptions(nextOptions) {
+  return filterConfig.reduce((normalized, filter) => {
+    normalized[filter.key] = ["Any", ...(nextOptions[filter.key] ?? [])];
+    return normalized;
+  }, {});
+}
+
 export default function HeroFilters() {
-  const [activitySearch, setActivitySearch] = useState("");
-  const [selectedActivity, setSelectedActivity] = useState("");
+  const filterPanelRef = useRef(null);
+  const [options, setOptions] = useState(emptyOptions);
+  const [selectedValues, setSelectedValues] = useState(emptySelections);
+  const [openFilter, setOpenFilter] = useState(null);
+  const [searchTerms, setSearchTerms] = useState({});
+  const [status, setStatus] = useState("Loading filters...");
 
-  const normalizedSearch = activitySearch.trim().toLowerCase();
-  const matchingActivities = activities.filter((activity) => {
-    const searchableText = `${activity.name} ${activity.category}`.toLowerCase();
-    return searchableText.includes(normalizedSearch);
-  });
+  useEffect(() => {
+    let isMounted = true;
 
-  function chooseActivity(activityName) {
-    setSelectedActivity(activityName);
+    async function loadOptions() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/filter-options`);
+
+        if (!response.ok) {
+          throw new Error("Filter options request failed");
+        }
+
+        const nextOptions = await response.json();
+
+        if (isMounted) {
+          setOptions(normalizeOptions(nextOptions));
+          setStatus("");
+        }
+      } catch (error) {
+        if (isMounted) {
+          setStatus("Start the Flask API to load live filter options.");
+        }
+      }
+    }
+
+    loadOptions();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    function closeDropdownOnOutsideClick(event) {
+      if (
+        filterPanelRef.current &&
+        !filterPanelRef.current.contains(event.target)
+      ) {
+        setOpenFilter(null);
+      }
+    }
+
+    document.addEventListener("pointerdown", closeDropdownOnOutsideClick);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeDropdownOnOutsideClick);
+    };
+  }, []);
+
+  function toggleFilter(key) {
+    setOpenFilter((currentFilter) => (currentFilter === key ? null : key));
+  }
+
+  function chooseOption(key, option) {
+    setSelectedValues((currentValues) => ({
+      ...currentValues,
+      [key]: option,
+    }));
+    setOpenFilter(null);
+  }
+
+  function updateSearchTerm(key, value) {
+    setSearchTerms((currentTerms) => ({
+      ...currentTerms,
+      [key]: value,
+    }));
   }
 
   function findMatchingCities() {
-    const resultsPath = selectedActivity
-      ? `/results?activity=${encodeURIComponent(selectedActivity)}`
-      : "/results";
+    const params = new URLSearchParams();
 
-    window.location.href = resultsPath;
+    filterConfig.forEach((filter) => {
+      const selectedValue = selectedValues[filter.key];
+
+      if (selectedValue && selectedValue !== "Any") {
+        params.set(filter.key, selectedValue);
+      }
+    });
+
+    const queryString = params.toString();
+    window.location.href = queryString ? `/results?${queryString}` : "/results";
   }
 
   return (
-    <section className="filter-panel" aria-label="Activity search filter">
-      <div className="filter-row activity-row">
-        <div className="filter-heading">
-          <span className="row-icon activity" aria-hidden="true">
-            A
-          </span>
-          <span>Activities</span>
-        </div>
+    <section className="hero-filter-panel" ref={filterPanelRef}>
+      <div className="filter-grid" aria-label="City search filters">
+        {filterConfig.map((filter) => {
+          const isOpen = openFilter === filter.key;
+          const searchTerm = searchTerms[filter.key] || "";
+          const visibleOptions = getFilteredOptions(options[filter.key], searchTerm);
 
-        <div className="activity-controls">
-          <label className="activity-search-wrap">
-            <span className="sr-only">Search activities</span>
-            <input
-              className="activity-search"
-              type="text"
-              value={activitySearch}
-              placeholder="Search activities..."
-              onChange={(event) => setActivitySearch(event.target.value)}
-            />
-            <span className="search-mini-icon" aria-hidden="true"></span>
-          </label>
-
-          <div className="activity-chip-row" aria-label="Activity options">
-            {matchingActivities.map((activity) => (
+          return (
+            <div className="filter-wrap" key={filter.key}>
               <button
-                className={
-                  selectedActivity === activity.name
-                    ? "activity-chip selected"
-                    : "activity-chip"
-                }
-                key={activity.name}
+                className={`filter-card ${isOpen ? "open" : ""}`}
                 type="button"
-                onClick={() => chooseActivity(activity.name)}
+                aria-expanded={isOpen}
+                aria-haspopup="listbox"
+                onClick={() => toggleFilter(filter.key)}
               >
-                <span>{activity.name}</span>
-                <span className="activity-category">{activity.category}</span>
+                <span className={`filter-icon ${filter.accent}`} aria-hidden="true">
+                  {filter.icon}
+                </span>
+                <span className="filter-copy">
+                  <span className="filter-label">{filter.label}</span>
+                  <span className="filter-value">{selectedValues[filter.key]}</span>
+                </span>
+                <span className="filter-arrow" aria-hidden="true"></span>
               </button>
-            ))}
 
-            {matchingActivities.length === 0 && (
-              <p className="empty-filter-text">No activity matches</p>
-            )}
-          </div>
-        </div>
+              {isOpen && (
+                <div className="filter-menu">
+                  <label className="filter-search-label">
+                    <span className="sr-only">Search {filter.label} options</span>
+                    <input
+                      className="filter-search"
+                      type="text"
+                      value={searchTerm}
+                      placeholder={`Type ${filter.label.toLowerCase()}...`}
+                      onChange={(event) =>
+                        updateSearchTerm(filter.key, event.target.value)
+                      }
+                      autoFocus
+                    />
+                  </label>
+
+                  <div className="filter-option-list" role="listbox">
+                    {visibleOptions.length > 0 ? (
+                      visibleOptions.map((option) => (
+                        <button
+                          className={
+                            selectedValues[filter.key] === option
+                              ? "filter-option selected"
+                              : "filter-option"
+                          }
+                          key={option}
+                          role="option"
+                          aria-selected={selectedValues[filter.key] === option}
+                          type="button"
+                          onClick={() => chooseOption(filter.key, option)}
+                        >
+                          {option}
+                        </button>
+                      ))
+                    ) : (
+                      <p className="empty-options">No close matches</p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
+
+      {status && <p className="filter-status">{status}</p>}
 
       <button className="match-button" type="button" onClick={findMatchingCities}>
         <span className="button-search-icon" aria-hidden="true"></span>
