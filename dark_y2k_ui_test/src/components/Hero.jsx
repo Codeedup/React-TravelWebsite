@@ -6,12 +6,6 @@ export default function Hero() {
         <div className="hero-reticle" aria-hidden="true">
           <span></span>
         </div>
-        <div className="hero-coordinates hud-mini">
-          <span>Location Intel</span>
-          <strong>13.7563 N</strong>
-          <strong>100.5018 E</strong>
-          <em>Elev. 12m</em>
-        </div>
         <div className="hero-weather hud-mini">
           <span>Environment</span>
           <dl>

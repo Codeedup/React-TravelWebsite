@@ -658,27 +658,6 @@ img {
   text-transform: uppercase;
 }
 
-.hero-coordinates {
-  right: 46%;
-  bottom: 78px;
-  display: grid;
-  gap: 4px;
-  min-width: 142px;
-  padding: 12px;
-  font-size: 0.68rem;
-}
-
-.hero-coordinates strong {
-  color: var(--cream);
-  font-weight: 400;
-}
-
-.hero-coordinates em {
-  color: var(--muted);
-  font-style: normal;
-  text-transform: uppercase;
-}
-
 .hero-weather {
   top: 34px;
   right: 18px;
@@ -1505,7 +1484,6 @@ img {
   }
 
   .hero-weather,
-  .hero-coordinates,
   .scenic-score {
     position: relative;
     top: auto;
