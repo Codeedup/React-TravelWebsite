@@ -1,0 +1,46 @@
+export const destinationImageMap = {
+  amsterdam: "/assets/destinations/amsterdam.jpg",
+  athens: "/assets/destinations/athens.jpg",
+  barcelona: "/assets/destinations/barcelona.jpg",
+  berlin: "/assets/destinations/berlin.jpg",
+  dubrovnik: "/assets/destinations/dubrovnik.jpg",
+  edinburgh: "/assets/destinations/edinburgh.jpg",
+  istanbul: "/assets/destinations/istanbul.jpg",
+  lisbon: "/assets/destinations/lisbon.jpg",
+  paris: "/assets/destinations/paris.jpg",
+  rome: "/assets/destinations/rome.jpg",
+};
+
+export function slugifyDestination(name = "") {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+export function formatOptionLabel(value = "") {
+  return value
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+    .join(" ");
+}
+
+export function getMatchPercent(destination, index = 0) {
+  const selectedFilterCount = Number(destination.selected_filter_count || 0);
+  const matchCount = Number(destination.match_count || 0);
+
+  if (selectedFilterCount > 0) {
+    const ratio = matchCount / selectedFilterCount;
+    return Math.round(72 + ratio * 26);
+  }
+
+  return Math.max(81, 94 - index * 2);
+}
+
+export function getWeatherLine(destination) {
+  const weather = destination.weather_band || "Weather unknown";
+  const temp =
+    typeof destination.avg_temp_c === "number" ? `${destination.avg_temp_c.toFixed(1)}C` : "";
+  const rain =
+    typeof destination.rainfall_mm === "number" ? `${destination.rainfall_mm.toFixed(0)}mm rain` : "";
+
+  return [weather, temp, rain].filter(Boolean).join(" / ");
+}
