@@ -1,1 +1,0 @@
-export const mySecret = "THIS IS A HIDDEN PASSWORD";
