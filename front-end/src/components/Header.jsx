@@ -1,8 +1,7 @@
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Compare", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Data Sources", href: "/" },
+  { label: "See Our DB", href: "/dataViewer" },
 ];
 
 export default function Header({ currentPage = "Home" }) {

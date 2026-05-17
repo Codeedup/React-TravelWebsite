@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 const API_BASE_URL = "http://127.0.0.1:5001";
 
-// --- UPDATE: Added 'Cost' and 'Weather' back to match the updated travel_planner.db schema ---
 const filterConfig = [
   { label: "Cost", key: "cost", icon: "$", accent: "green" },
   { label: "Weather", key: "weather", icon: "W", accent: "orange" },
@@ -23,44 +22,26 @@ const emptySelections = filterConfig.reduce((selections, filter) => {
 function getSimilarityScore(option, searchTerm) {
   const optionText = option.toLowerCase();
   const query = searchTerm.trim().toLowerCase();
-
-  if (!query) {
-    return 1;
-  }
-
-  if (optionText === query) {
-    return 100;
-  }
-
-  if (optionText.startsWith(query)) {
-    return 80;
-  }
-
-  if (optionText.includes(query)) {
-    return 60;
-  }
+  if (!query) return 1;
+  if (optionText === query) return 100;
+  if (optionText.startsWith(query)) return 80;
+  if (optionText.includes(query)) return 60;
 
   let optionIndex = 0;
   let matches = 0;
-
   for (const letter of query) {
     const nextMatch = optionText.indexOf(letter, optionIndex);
-
     if (nextMatch !== -1) {
       matches += 1;
       optionIndex = nextMatch + 1;
     }
   }
-
   return matches / query.length;
 }
 
 function getFilteredOptions(options, searchTerm) {
   return options
-    .map((option) => ({
-      option,
-      score: getSimilarityScore(option, searchTerm),
-    }))
+    .map((option) => ({ option, score: getSimilarityScore(option, searchTerm) }))
     .filter(({ score }) => score > 0.35)
     .sort((first, second) => second.score - first.score)
     .map(({ option }) => option);
@@ -73,7 +54,8 @@ function normalizeOptions(nextOptions) {
   }, {});
 }
 
-export default function HeroFilters() {
+// --- UPDATE: Accepts onSearchComplete prop to communicate directly with index.astro page context ---
+export default function HeroFilters({ onSearchComplete }) {
   const filterPanelRef = useRef(null);
   const [options, setOptions] = useState(emptyOptions);
   const [selectedValues, setSelectedValues] = useState(emptySelections);
@@ -83,50 +65,31 @@ export default function HeroFilters() {
 
   useEffect(() => {
     let isMounted = true;
-
     async function loadOptions() {
       try {
         const response = await fetch(`${API_BASE_URL}/api/filter-options`);
-
-        if (!response.ok) {
-          throw new Error("Filter options request failed");
-        }
-
+        if (!response.ok) throw new Error("Filter options request failed");
         const nextOptions = await response.json();
-
         if (isMounted) {
           setOptions(normalizeOptions(nextOptions));
           setStatus("");
         }
       } catch (error) {
-        if (isMounted) {
-          setStatus("Start the Flask API to load live filter options.");
-        }
+        if (isMounted) setStatus("Start the Flask API to load live filter options.");
       }
     }
-
     loadOptions();
-
-    return () => {
-      isMounted = false;
-    };
+    return () => { isMounted = false; };
   }, []);
 
   useEffect(() => {
     function closeDropdownOnOutsideClick(event) {
-      if (
-        filterPanelRef.current &&
-        !filterPanelRef.current.contains(event.target)
-      ) {
+      if (filterPanelRef.current && !filterPanelRef.current.contains(event.target)) {
         setOpenFilter(null);
       }
     }
-
     document.addEventListener("pointerdown", closeDropdownOnOutsideClick);
-
-    return () => {
-      document.removeEventListener("pointerdown", closeDropdownOnOutsideClick);
-    };
+    return () => { document.removeEventListener("pointerdown", closeDropdownOnOutsideClick); };
   }, []);
 
   function toggleFilter(key) {
@@ -134,33 +97,54 @@ export default function HeroFilters() {
   }
 
   function chooseOption(key, option) {
-    setSelectedValues((currentValues) => ({
-      ...currentValues,
-      [key]: option,
-    }));
+    setSelectedValues((currentValues) => ({ ...currentValues, [key]: option }));
     setOpenFilter(null);
   }
 
   function updateSearchTerm(key, value) {
-    setSearchTerms((currentTerms) => ({
-      ...currentTerms,
-      [key]: value,
-    }));
+    setSearchTerms((currentTerms) => ({ ...currentTerms, [key]: value }));
   }
 
-  function findMatchingCities() {
+  // --- UPDATE: Modified to perform an in-place fetch instead of updating window.location ---
+  async function findMatchingCities() {
+    setStatus("Searching database profiles...");
     const params = new URLSearchParams();
 
     filterConfig.forEach((filter) => {
       const selectedValue = selectedValues[filter.key];
-
       if (selectedValue && selectedValue !== "Any") {
         params.set(filter.key, selectedValue);
       }
     });
 
-    const queryString = params.toString();
-    window.location.href = queryString ? `/results?${queryString}` : "/results";
+    try {
+      const queryString = params.toString();
+      const searchUrl = queryString ? `${API_BASE_URL}/api/search?${queryString}` : `${API_BASE_URL}/api/search`;
+      
+      const response = await fetch(searchUrl);
+      if (response.ok === false) {
+        throw new Error("Search execution query failed.");
+      }
+      
+      const allResults = await response.json();
+      
+      // Strict First Year CS rule implementation: take a slice of at most 3 entries manually
+      let slicedResults = [];
+      for (let i = 0; i < allResults.length; i++) {
+        if (i < 3) {
+          slicedResults.push(allResults[i]);
+        }
+      }
+      
+      setStatus("");
+      
+      // Fire callback with the 3 results
+      if (onSearchComplete !== undefined) {
+        onSearchComplete(slicedResults);
+      }
+    } catch (err) {
+      setStatus("Error fetching search results. Please verify your Python Flask kernel state.");
+    }
   }
 
   return (
@@ -199,9 +183,7 @@ export default function HeroFilters() {
                       type="text"
                       value={searchTerm}
                       placeholder={`Type ${filter.label.toLowerCase()}...`}
-                      onChange={(event) =>
-                        updateSearchTerm(filter.key, event.target.value)
-                      }
+                      onChange={(event) => updateSearchTerm(filter.key, event.target.value)}
                       autoFocus
                     />
                   </label>
@@ -210,11 +192,7 @@ export default function HeroFilters() {
                     {visibleOptions.length > 0 ? (
                       visibleOptions.map((option) => (
                         <button
-                          className={
-                            selectedValues[filter.key] === option
-                              ? "filter-option selected"
-                              : "filter-option"
-                          }
+                          className={selectedValues[filter.key] === option ? "filter-option selected" : "filter-option"}
                           key={option}
                           role="option"
                           aria-selected={selectedValues[filter.key] === option}

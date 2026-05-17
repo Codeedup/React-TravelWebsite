@@ -1,46 +1,8 @@
 ---
 import Header from "../components/Header.jsx";
-import HeroFilters from "../components/HeroFilters.jsx";
-import CityCard from "../components/CityCard.jsx";
+import SearchContainer from "../components/SearchContainer.jsx";
 import FeatureStrip from "../components/FeatureStrip.jsx";
 import "../styles/global.css";
-
-// Static placeholder data keeps this prototype frontend-only.
-const cities = [
-  {
-    name: "Lisbon",
-    country: "Portugal",
-    imageClass: "lisbon",
-    stats: [
-      { label: "Cost", value: "Moderate" },
-      { label: "Vibe", value: "Relaxed" },
-      { label: "Language", value: "Portuguese" },
-      { label: "Weather", value: "Mild" },
-    ],
-  },
-  {
-    name: "Tokyo",
-    country: "Japan",
-    imageClass: "tokyo",
-    stats: [
-      { label: "Cost", value: "High" },
-      { label: "Vibe", value: "Modern" },
-      { label: "Language", value: "Japanese" },
-      { label: "Weather", value: "Four Seasons" },
-    ],
-  },
-  {
-    name: "Prague",
-    country: "Czech Republic",
-    imageClass: "prague",
-    stats: [
-      { label: "Cost", value: "Moderate" },
-      { label: "Vibe", value: "Historic" },
-      { label: "Language", value: "Czech" },
-      { label: "Weather", value: "Mild" },
-    ],
-  },
-];
 ---
 
 <html lang="en">
@@ -50,7 +12,7 @@ const cities = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="City Vibe Explorer is a static city comparison homepage prototype."
+      content="City Vibe Explorer is a live SQLite database relational search prototype ecosystem."
     />
     <title>City Vibe Explorer</title>
   </head>
@@ -62,10 +24,6 @@ const cities = [
     <main class="page-shell">
       
       <section class="hero-section" aria-labelledby="hero-title">
-        <div class="hero-orb" aria-hidden="true"></div>
-        <div class="cloud cloud-one" aria-hidden="true"></div>
-        <div class="cloud cloud-two" aria-hidden="true"></div>
-        <div class="skyline-shape" aria-hidden="true"></div>
 
         <div class="hero-copy">
           <h1 id="hero-title">Find your next city match</h1>
@@ -74,11 +32,8 @@ const cities = [
           </p>
         </div>
 
-        <HeroFilters client:load />
-      </section>
-
-      <section class="city-grid" aria-label="Featured city previews">
-        {cities.map((city) => <CityCard city={city} />)}
+        {/* This combined wrapper component handles live search events in-place without page routing */}
+        <SearchContainer client:load />
       </section>
 
       <FeatureStrip />
