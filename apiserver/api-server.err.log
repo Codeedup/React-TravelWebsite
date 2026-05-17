@@ -1,0 +1,11 @@
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5001
+Press CTRL+C to quit
+127.0.0.1 - - [12/May/2026 19:04:17] "GET /api/filter-options HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 19:04:45] "GET /api/search?cost=cheap&weather=Hot&activity=history&vibe=Cultural%20Roots HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 19:04:45] "GET /api/search?activity=history&vibe=Cultural%20Roots HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 19:11:29] "GET /api/filter-options HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 19:12:12] "GET /api/search?cost=cheap&weather=Hot&activity=beach&vibe=Sun+%26+Sand HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 19:12:40] "GET /api/filter-options HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 19:12:58] "GET /api/search?cost=expensive&weather=Snowy&activity=history HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 19:13:49] "GET /api/filter-options HTTP/1.1" 200 -
