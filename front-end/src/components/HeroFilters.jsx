@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const API_BASE_URL = "http://127.0.0.1:5001";
 
+// --- UPDATE: Added 'Cost' and 'Weather' back to match the updated travel_planner.db schema ---
 const filterConfig = [
   { label: "Cost", key: "cost", icon: "$", accent: "green" },
   { label: "Weather", key: "weather", icon: "W", accent: "orange" },

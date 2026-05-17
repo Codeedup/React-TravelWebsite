@@ -21,22 +21,12 @@ function getActiveFilters(searchParams) {
   }, {});
 }
 
+// --- UPDATE: Restructured to show the smart "Best Month" recommendation ---
 function getWeatherSummary(result) {
-  const parts = [];
-
-  if (result.weather_band) {
-    parts.push(result.weather_band);
+  if (result.best_month && result.best_month !== "Unknown") {
+    return `Best time: ${result.best_month} (${result.best_month_temp}°C)`;
   }
-
-  if (typeof result.avg_temp_c === "number") {
-    parts.push(`${result.avg_temp_c.toFixed(1)}C`);
-  }
-
-  if (typeof result.rainfall_mm === "number") {
-    parts.push(`${result.rainfall_mm.toFixed(0)}mm rain`);
-  }
-
-  return parts.join(" | ");
+  return "Weather data unavailable";
 }
 
 export default function ResultsList() {
@@ -133,19 +123,34 @@ export default function ResultsList() {
                 <p className="result-country">{result.country}</p>
 
                 <div className="result-chip-row" aria-label="Destination details">
-                  <span className="result-chip cost">{result.cost}</span>
+                  {/* Safely check if cost exists before rendering */}
+                  {result.cost && <span className="result-chip cost">{result.cost}</span>}
+                  
                   <span className="result-chip weather">
                     {getWeatherSummary(result)}
                   </span>
-                  <span className="result-chip activity">{result.activity_type}</span>
-                  {result.vibes.map((vibe) => (
+                  
+                  {/* Safely render activities and vibes arrays */}
+                  {result.activities && result.activities.map((activity) => (
+                    <span className="result-chip activity" key={activity}>{activity}</span>
+                  ))}
+                  {result.vibes && result.vibes.map((vibe) => (
                     <span className="result-chip vibe" key={vibe}>
                       {vibe}
                     </span>
                   ))}
                 </div>
 
-                <p className="result-reason">{result.activity_name}</p>
+                {/* --- UPDATE: Added a Seasonal Weather Breakdown --- */}
+                {result.seasons && (
+                  <div className="result-seasons" style={{ display: "flex", gap: "15px", marginTop: "15px", fontSize: "0.85rem", color: "#666" }}>
+                    <span>Avg Winter: {result.seasons.Winter}°C</span>
+                    <span>Avg Spring: {result.seasons.Spring}°C</span>
+                    <span>Avg Summer: {result.seasons.Summer}°C</span>
+                    <span>Avg Autumn: {result.seasons.Autumn}°C</span>
+                  </div>
+                )}
+
               </div>
             </article>
           ))}

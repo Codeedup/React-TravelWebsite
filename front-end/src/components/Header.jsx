@@ -17,7 +17,9 @@ export default function Header({ currentPage = "Home" }) {
         <nav className="main-nav" aria-label="Main navigation">
           {navLinks.map((link) => (
             <a
-              className={link.label === currentPage ? "nav-link active" : "nav-link"}
+              className={
+                link.label === currentPage ? "nav-link active" : "nav-link"
+              }
               href={link.href}
               key={link.label}
             >
