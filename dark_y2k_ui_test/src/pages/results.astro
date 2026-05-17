@@ -1,0 +1,23 @@
+---
+import Header from "../components/Header.jsx";
+import ResultsDashboard from "../components/ResultsDashboard.jsx";
+import BottomTicker from "../components/BottomTicker.jsx";
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Ranked WAYFINDER travel recommendations from the Flask API."
+    />
+    <title>Results | WAYFINDER</title>
+  </head>
+  <body>
+    <Header currentPage="Discover" client:load />
+    <ResultsDashboard client:load />
+    <BottomTicker />
+  </body>
+</html>
