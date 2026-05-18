@@ -5,6 +5,8 @@ const API_BASE_URL = "http://127.0.0.1:5001";
 export default function DatabaseViewer() {
   const [dbData, setDbData] = useState(null);
   const [activeTab, setActiveTab] = useState("Destinations");
+  // --- CHANGED: Added state to track the active filter ---
+  const [selectedCity, setSelectedCity] = useState("All");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -13,7 +15,6 @@ export default function DatabaseViewer() {
       try {
         const response = await fetch(`${API_BASE_URL}/api/database`);
         
-        // Explicit if statement instead of a one-liner
         if (response.ok === false) {
           throw new Error("Failed to fetch database data.");
         }
@@ -30,7 +31,11 @@ export default function DatabaseViewer() {
     fetchDatabase();
   }, []);
 
-  // Explicit if statements with full brackets instead of one-liners
+  // --- CHANGED: Reset the city filter back to "All" whenever you change tabs ---
+  useEffect(() => {
+    setSelectedCity("All");
+  }, [activeTab]);
+
   if (loading === true) {
     return <p className="results-message">Loading database records...</p>;
   }
@@ -45,8 +50,38 @@ export default function DatabaseViewer() {
 
   const tabs = Object.keys(dbData);
   const currentTableData = dbData[activeTab];
+  
+  // --- CHANGED: Setup our filtering logic ---
+  let displayData = currentTableData;
+  let filterUI = null;
 
-  // Helper function to handle the button colors using a standard if/else
+  // If the current table has a "City" column, we build the dropdown UI
+  if (currentTableData.length > 0 && currentTableData[0].City !== undefined) {
+    // Extract a list of unique cities and sort them alphabetically
+    const uniqueCities = [...new Set(currentTableData.map(item => item.City))].sort();
+
+    filterUI = (
+      <div style={styles.filterContainer}>
+        <label style={styles.filterLabel}>Filter by City: </label>
+        <select 
+          value={selectedCity} 
+          onChange={(e) => setSelectedCity(e.target.value)}
+          style={styles.filterSelect}
+        >
+          <option value="All">All Cities</option>
+          {uniqueCities.map((city) => (
+            <option key={city} value={city}>{city}</option>
+          ))}
+        </select>
+      </div>
+    );
+
+    // Apply the filter to the data if a specific city is chosen
+    if (selectedCity !== "All") {
+      displayData = currentTableData.filter(item => item.City === selectedCity);
+    }
+  }
+
   function getTabStyle(tabName) {
     let buttonStyle = { ...styles.tabButton };
     
@@ -61,10 +96,10 @@ export default function DatabaseViewer() {
     return buttonStyle;
   }
 
-  // Build the table headers using explicit if/else logic instead of &&
+  // --- CHANGED: We now map over displayData instead of currentTableData ---
   let tableHeaders = null;
-  if (currentTableData.length > 0) {
-    let firstRow = currentTableData[0];
+  if (displayData.length > 0) {
+    let firstRow = displayData[0];
     let columnNames = Object.keys(firstRow);
     
     tableHeaders = columnNames.map((key) => {
@@ -76,18 +111,27 @@ export default function DatabaseViewer() {
     });
   }
 
-  // Build the table rows using explicit if/else logic instead of a ternary operator
+  // --- CHANGED: We now map over displayData instead of currentTableData ---
   let tableRows = null;
-  if (currentTableData.length > 0) {
-    tableRows = currentTableData.map((row, rowIndex) => {
+  if (displayData.length > 0) {
+    tableRows = displayData.map((row, rowIndex) => {
       let rowValues = Object.values(row);
       
       return (
         <tr key={rowIndex} style={styles.tableRow}>
           {rowValues.map((val, colIndex) => {
+            let displayValue = val;
+            
+            if (typeof val === "number" && !Number.isInteger(val)) {
+              displayValue = val.toFixed(1); 
+            }
+            if (val === null) {
+               displayValue = "N/A";
+            }
+
             return (
               <td key={colIndex} style={styles.tableCell}>
-                {val}
+                {displayValue}
               </td>
             );
           })}
@@ -102,7 +146,6 @@ export default function DatabaseViewer() {
     );
   }
 
-  // The return statement is now incredibly clean and just renders the variables we built above!
   return (
     <div className="db-viewer" style={styles.container}>
       
@@ -119,6 +162,19 @@ export default function DatabaseViewer() {
             </button>
           );
         })}
+      </div>
+
+      {/* Summary Header */}
+      <div style={styles.tableSummary}>
+        <div>
+          <h3 style={{ margin: "0 0 5px 0" }}>Viewing: {activeTab}</h3>
+          <p style={{ margin: 0, fontSize: "14px", color: "#666" }}>
+            Showing <strong>{displayData.length}</strong> of <strong>{currentTableData.length}</strong> total records
+          </p>
+        </div>
+        
+        {/* --- CHANGED: Render the filter dropdown if it exists --- */}
+        {filterUI}
       </div>
 
       {/* Table Display */}
@@ -138,10 +194,9 @@ export default function DatabaseViewer() {
   );
 }
 
-
 const styles = {
   container: {
-    maxWidth: "1000px",
+    maxWidth: "1100px",
     margin: "0 auto",
     padding: "2rem"
   },
@@ -157,6 +212,39 @@ const styles = {
     borderRadius: "8px",
     cursor: "pointer",
     fontWeight: "bold",
+  },
+  tableSummary: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "15px",
+    padding: "0 10px",
+    color: "#333",
+    flexWrap: "wrap",
+    gap: "15px"
+  },
+  // --- CHANGED: Added styles for the new filter UI ---
+  filterContainer: {
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: "#f0f4f8",
+    padding: "10px 15px",
+    borderRadius: "8px",
+    border: "1px solid #dce4ec"
+  },
+  filterLabel: {
+    fontWeight: "bold",
+    marginRight: "10px",
+    fontSize: "14px",
+    color: "#333"
+  },
+  filterSelect: {
+    padding: "8px 12px",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+    fontSize: "14px",
+    cursor: "pointer",
+    minWidth: "150px"
   },
   tableWrapper: {
     overflowX: "auto",
@@ -183,6 +271,10 @@ const styles = {
   },
   tableCell: {
     padding: "12px",
-    color: "#333"
+    color: "#333",
+    maxWidth: "300px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis"
   }
 };
