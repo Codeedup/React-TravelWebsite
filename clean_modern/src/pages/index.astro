@@ -1,0 +1,27 @@
+---
+import Navbar from "../components/Navbar.jsx";
+import Hero from "../components/Hero.jsx";
+import FilterPanel from "../components/FilterPanel.jsx";
+import FeatureStrip from "../components/FeatureStrip.jsx";
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Wanderly is a clean travel recommender homepage powered by a Flask travel API."
+    />
+    <title>Wanderly | Smart Travel Recommendations</title>
+  </head>
+  <body>
+    <Navbar />
+    <main class="site-main">
+      <Hero />
+      <FilterPanel client:load />
+      <FeatureStrip />
+    </main>
+  </body>
+</html>
