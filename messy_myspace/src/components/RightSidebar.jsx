@@ -50,29 +50,7 @@ export default function RightSidebar() {
         </div>
       </section>
 
-      <section className="panel dream-feed" aria-labelledby="feed-title">
-        <h2 className="panel-title" id="feed-title">
-          <span aria-hidden="true">\</span>
-          DREAM FEED
-        </h2>
-        {feedItems.map((item) => (
-          <article key={item.handle}>
-            <div
-              className="feed-thumb"
-              style={{ "--feed-image": `url(${item.image})` }}
-              aria-hidden="true"
-            >
-              <span>{item.fallback}</span>
-            </div>
-            <div>
-              <strong>{item.handle}</strong>
-              <p>{item.text}</p>
-              <time>{item.time}</time>
-            </div>
-          </article>
-        ))}
-        <a href="/results">view all dreams &gt;&gt;</a>
-      </section>
+      
     </aside>
   );
 }

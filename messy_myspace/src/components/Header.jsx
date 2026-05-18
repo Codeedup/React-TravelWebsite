@@ -1,14 +1,17 @@
 const navItems = [
-  "HOME",
-  "DESTINATIONS",
-  "DREAMLIST",
-  "JOURNEYS",
-  "COMMUNITY",
-  "ABOUT",
-  "CONTACT",
+  { label: "HOME", href: "/" },
+  { label: "ABOUT", href: "/about" },
+  { label: "CONTACT", href: "/contact" },
+  { label: "DATABASE", href: "/database" },
 ];
 
-export default function Header() {
+function normalizePath(path = "/") {
+  return path.length > 1 && path.endsWith("/") ? path.slice(0, -1) : path;
+}
+
+export default function Header({ currentPath = "/" }) {
+  const activePath = normalizePath(currentPath);
+
   return (
     <header className="top-chrome">
       <div className="welcome-strip">
@@ -20,8 +23,12 @@ export default function Header() {
 
       <nav className="main-nav" aria-label="Main navigation">
         {navItems.map((item) => (
-          <a className={item === "HOME" ? "active" : ""} href={item === "HOME" ? "/" : "/"} key={item}>
-            {item}
+          <a
+            className={normalizePath(item.href) === activePath ? "active" : ""}
+            href={item.href}
+            key={item.href}
+          >
+            {item.label}
           </a>
         ))}
       </nav>

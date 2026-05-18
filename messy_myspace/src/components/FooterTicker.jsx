@@ -1,10 +1,9 @@
 export default function FooterTicker() {
   return (
     <footer className="radio-footer">
-      <strong>DREAMROUTE RADIO</strong>
+      <strong>DREAMROUTE </strong>
       <div className="ticker-copy" aria-label="Travel radio ticker">
         <span>tune in. zone out. travel beyond.</span>
-        <span>cheap cities rising</span>
         <span>dream signal unstable</span>
       </div>
       <div className="equalizer" aria-hidden="true">

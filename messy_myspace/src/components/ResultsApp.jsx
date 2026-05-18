@@ -87,7 +87,7 @@ export default function ResultsApp() {
               </div>
               <a href="/">back home &gt;&gt;</a>
             </div>
-            <DestinationGrid destinations={results} />
+            <DestinationGrid destinations={results} limit={3} />
           </section>
         </section>
 

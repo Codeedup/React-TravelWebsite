@@ -43,7 +43,7 @@ export default function MessyMyspaceApp() {
     };
   }, []);
 
-  const topDestinations = useMemo(() => destinations.slice(0, 6), [destinations]);
+  const topDestinations = useMemo(() => destinations.slice(0, 3), [destinations]);
 
   return (
     <>
@@ -64,7 +64,7 @@ export default function MessyMyspaceApp() {
               </div>
               <a href="/results">view all results &gt;&gt;</a>
             </div>
-            <DestinationGrid destinations={topDestinations} limit={6} />
+            <DestinationGrid destinations={topDestinations} limit={3} />
           </section>
         </section>
 

@@ -11,7 +11,7 @@ export default function LeftSidebar() {
       </section>
 
       <section className="profile-card panel" aria-labelledby="profile-title">
-        <PanelTitle id="profile-title">TRAVELER PROFILE</PanelTitle>
+        <PanelTitle id="profile-title">TRAVELER PROFILE - Work in Progress</PanelTitle>
         <div className="profile-grid">
           <div className="avatar-static" aria-label="Pixel style traveler avatar">
             <span></span>
@@ -40,30 +40,6 @@ export default function LeftSidebar() {
         </div>
       </section>
 
-      <section className="panel broadcast" aria-labelledby="broadcast-title">
-        <PanelTitle id="broadcast-title">SYSTEM BROADCAST</PanelTitle>
-        <p>&gt; the world is not a map.</p>
-        <p>&gt; it's a feeling.</p>
-        <p>&gt; let's find yours.</p>
-      </section>
-
-      <section className="panel now-playing" aria-labelledby="playing-title">
-        <PanelTitle id="playing-title">NOW PLAYING</PanelTitle>
-        <div className="album-noise" aria-hidden="true"></div>
-        <div>
-          <strong>Boards of Canada</strong>
-          <span>&gt; Roygbiv</span>
-          <small>00:42 / 05:27</small>
-        </div>
-        <a href="/">open player</a>
-      </section>
-
-      <section className="ticket-stub" aria-label="Dreamroute boarding pass">
-        <span>DREAMROUTE AIRWAYS</span>
-        <strong>DESTINATION UNKNOWN</strong>
-        <small>GOOD FOR ONE WAY</small>
-        <b>DRM#001</b>
-      </section>
     </aside>
   );
 }

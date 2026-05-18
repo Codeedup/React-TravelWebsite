@@ -1,0 +1,69 @@
+---
+import FooterTicker from "../components/FooterTicker.jsx";
+import Header from "../components/Header.jsx";
+import LeftSidebar from "../components/LeftSidebar.jsx";
+import RightSidebar from "../components/RightSidebar.jsx";
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Contact page for the DREAMROUTE travel recommender project."
+    />
+    <title>Contact | DREAMROUTE_</title>
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <Header currentPath="/contact" />
+    <main class="myspace-shell info-shell">
+      <LeftSidebar />
+
+      <section class="main-column info-column" aria-label="Contact Dreamroute">
+        <section class="results-hero panel info-hero" aria-labelledby="contact-title">
+          <p>\ CONTACT NODE</p>
+          <h1 id="contact-title">SEND A SIGNAL TO DREAMROUTE_</h1>
+          <span>Questions, route ideas, and API sightings accepted.</span>
+        </section>
+
+        <section class="results-panel panel info-panel" aria-labelledby="contact-project-title">
+          <div class="section-title-row">
+            <div>
+              <p>\ TRANSMISSION CHANNELS</p>
+              <h2 id="contact-project-title">local project contact sheet</h2>
+            </div>
+            <a href="/">back home &gt;&gt;</a>
+          </div>
+
+          <div class="contact-grid">
+            <a href="mailto:hello@dreamroute.local">
+              <span>EMAIL</span>
+              hello@dreamroute.local
+            </a>
+            <a href="http://127.0.0.1:5001/api/search">
+              <span>API</span>
+              127.0.0.1:5001/api/search
+            </a>
+            <a href="/database">
+              <span>DATABASE</span>
+              browse travel.db tables
+            </a>
+          </div>
+
+          <div class="info-copy">
+            <p>
+              This contact page is wired into the same header as the rest of the MySpace skin, so
+              the main navigation now lands on real pages instead of looping everything back home.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <RightSidebar />
+    </main>
+    <FooterTicker />
+  </body>
+</html>

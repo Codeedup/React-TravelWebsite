@@ -72,6 +72,16 @@ export async function fetchRecommendedDestinations(filters = {}) {
   return response.json();
 }
 
+export async function fetchDatabaseSnapshot() {
+  const response = await fetch(`${API_BASE_URL}/api/database`);
+
+  if (!response.ok) {
+    throw new Error("Database snapshot request failed");
+  }
+
+  return response.json();
+}
+
 export function getFallbackDestinations() {
   return fallbackDestinations;
 }
