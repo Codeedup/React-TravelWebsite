@@ -16,29 +16,15 @@ This project is organized for submission using the requested folder layout:
 
 - `setup/setup.ipynb`
 - `setup/updater.ipynb`
-- `setup/datatables_analysis.ipynb`
 
 ### `/apiserver/`
 
-- `apiserver/run_api.py`
 - `apiserver/server.ipynb`
-- `apiserver/data/travel.db`
+- `apiserver/data/travel_planner.db`
 
-### `/apiviewer/`
+### `/messy_myspace/`
 
-- `apiviewer/astro.config.mjs`
-- `apiviewer/package-lock.json`
-- `apiviewer/package.json`
-- `apiviewer/tsconfig.json`
-- `apiviewer/src/components/CityCard.jsx`
-- `apiviewer/src/components/FeatureStrip.jsx`
-- `apiviewer/src/components/Header.jsx`
-- `apiviewer/src/components/HeroFilters.jsx`
-- `apiviewer/src/components/ResultsList.jsx`
-- `apiviewer/src/pages/about.astro`
-- `apiviewer/src/pages/index.astro`
-- `apiviewer/src/pages/results.astro`
-- `apiviewer/src/styles/global.css`
+- Astro/React frontend for the DREAMROUTE messy MySpace interface.
 
 ### `/report/`
 
@@ -46,22 +32,28 @@ This project is organized for submission using the requested folder layout:
 
 ## Run Commands
 
-Run the Flask API from the API folder:
+Run the Flask API manually from the notebook:
 
-```powershell
-cd apiserver
-python run_api.py
-```
+1. Open `apiserver/server.ipynb`.
+2. Run the setup/install cell if Flask or Flask-CORS is not installed.
+3. Run the Flask app cell.
+4. Keep the notebook kernel running while using the frontend.
 
 Run the Astro/React frontend from the frontend folder:
 
 ```powershell
-cd apiviewer
+cd messy_myspace
 npm install
 npm run dev
 ```
 
 The frontend expects the API at `http://127.0.0.1:5001`.
+
+## Database Build Flow
+
+Run `setup/setup.ipynb` first to create the canonical SQLite schema, then run
+`setup/updater.ipynb` to populate `apiserver/data/travel_planner.db`. The Flask
+server reads that database directly.
 
 ## Generated Files
 

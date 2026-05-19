@@ -84,7 +84,7 @@ export default function DatabaseApp() {
         <section className="main-column" aria-label="Dreamroute database">
           <section className="database-hero panel" aria-labelledby="database-title">
             <p>\ DATABASE ACCESS</p>
-            <h1 id="database-title">{snapshot?.database ?? "TRAVEL.DB"}</h1>
+            <h1 id="database-title">{snapshot?.database ?? "TRAVEL_PLANNER.DB"}</h1>
             <span>
               {loading
                 ? "dialing sqlite signal..."
