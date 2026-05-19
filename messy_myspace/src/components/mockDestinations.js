@@ -1,6 +1,20 @@
 export const fallbackFilterOptions = {
   activity: ["architecture", "art", "beach", "history"],
   cost: ["cheap", "expensive", "medium"],
+  month: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
   vibe: [
     "Cultural Roots",
     "Frugal Adventure",

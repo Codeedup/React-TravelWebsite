@@ -12,11 +12,10 @@ export default function FooterTicker() {
         ))}
       </div>
       <nav aria-label="Footer links">
-        <a href="/">site map</a>
-        <a href="/">terms</a>
-        <a href="/">privacy</a>
-        <a href="/">credits</a>
-        <a href="/">contact</a>
+        <a href="/">home</a>
+        <a href="/about">about</a>
+        <a href="/contact">contact</a>
+        <a href="/database">database</a>
       </nav>
       <small>© 2007-2025 DREAMROUTE NETWORK</small>
     </footer>

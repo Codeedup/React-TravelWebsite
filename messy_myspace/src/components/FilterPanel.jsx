@@ -24,7 +24,13 @@ export default function FilterPanel({ initialFilters = {}, compact = false }) {
       ...emptyFilters,
       ...initialFilters,
     });
-  }, [initialFilters.activity, initialFilters.cost, initialFilters.vibe, initialFilters.weather]);
+  }, [
+    initialFilters.activity,
+    initialFilters.cost,
+    initialFilters.month,
+    initialFilters.vibe,
+    initialFilters.weather,
+  ]);
 
   useEffect(() => {
     let isMounted = true;

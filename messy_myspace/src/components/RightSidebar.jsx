@@ -22,6 +22,25 @@ const feedItems = [
   },
 ];
 
+const passportStamps = [
+  {
+    src: "/assets/ui_images/reykjavik_iceland_stamp.png",
+    alt: "Reykjavik Iceland passport stamp",
+  },
+  {
+    src: "/assets/ui_images/tokyo_japan_stamp.png",
+    alt: "Tokyo Japan passport stamp",
+  },
+  {
+    src: "/assets/ui_images/machu_picchu_peru_stamp.png",
+    alt: "Machu Picchu Peru passport stamp",
+  },
+  {
+    src: "/assets/ui_images/marrakech_morocco_stamp.png",
+    alt: "Marrakech Morocco passport stamp",
+  },
+];
+
 export default function RightSidebar() {
   return (
     <aside className="right-rail" aria-label="Travel widgets">
@@ -43,10 +62,9 @@ export default function RightSidebar() {
           PASSPORT STAMPS
         </h2>
         <div className="stamp-grid">
-          <span>ICELAND<br />ARRIVED<br />12 MAY 2023</span>
-          <span>TOKYO<br />51.0<br />APPROVED</span>
-          <span>PERU<br />MACHU PICCHU<br />22 OCT 2002</span>
-          <span>SB 11.26<br />VOID<br />VOID</span>
+          {passportStamps.map((stamp) => (
+            <img key={stamp.src} src={stamp.src} alt={stamp.alt} loading="lazy" />
+          ))}
         </div>
       </section>
 

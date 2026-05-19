@@ -793,7 +793,7 @@ img {
 
 .select-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 28px;
 }
 
@@ -1070,30 +1070,33 @@ img {
 .stamp-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  padding: 0 14px;
+  gap: 4px 8px;
+  padding: 0 10px 4px;
 }
 
-.stamp-grid span {
-  display: grid;
-  min-height: 74px;
-  border: 1px dashed currentColor;
-  color: var(--paper);
-  font-size: 0.62rem;
-  line-height: 1.35;
-  place-items: center;
-  text-align: center;
+.stamp-grid img {
+  display: block;
+  width: 118%;
+  max-width: none;
+  aspect-ratio: 1 / 1;
+  justify-self: center;
+  object-fit: contain;
+  margin: -8px 0;
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.28));
   transform: rotate(-4deg);
 }
 
-.stamp-grid span:nth-child(2),
-.stamp-grid span:nth-child(4) {
-  color: var(--cyan);
+.stamp-grid img:first-child {
+  width: 140%;
+  transform: translateX(-8px) rotate(-4deg);
+}
+
+.stamp-grid img:nth-child(2),
+.stamp-grid img:nth-child(4) {
   transform: rotate(8deg);
 }
 
-.stamp-grid span:nth-child(3) {
-  color: #f5b05a;
+.stamp-grid img:nth-child(3) {
   transform: rotate(-9deg);
 }
 
