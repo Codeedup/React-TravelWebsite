@@ -11,7 +11,12 @@ import { formatOptionLabel } from "./destinationUtils";
 
 const emptyFilters = createEmptyFilters();
 
-export default function FilterPanel({ initialFilters = {}, compact = false }) {
+export default function FilterPanel({
+  initialFilters = {},
+  compact = false,
+  title = "TELL US WHAT YOU'RE INTO",
+  buttonLabel = "FIND MY DESTINATION",
+}) {
   const [options, setOptions] = useState(normalizeFilterOptions(fallbackFilterOptions));
   const [selectedFilters, setSelectedFilters] = useState({
     ...emptyFilters,
@@ -86,7 +91,7 @@ export default function FilterPanel({ initialFilters = {}, compact = false }) {
       <div className="panel-title-row">
         <h2 id="filter-title">
           <span aria-hidden="true">\</span>
-          TELL US WHAT YOU'RE INTO
+          {title}
         </h2>
         <span>{activeFilterCount} charms selected</span>
       </div>
@@ -115,7 +120,7 @@ export default function FilterPanel({ initialFilters = {}, compact = false }) {
         <p>{status}</p>
         <button className="find-button" type="button" onClick={findDestination}>
           <span aria-hidden="true">+</span>
-          FIND MY DESTINATION
+          {buttonLabel}
           <span aria-hidden="true">+</span>
         </button>
       </div>

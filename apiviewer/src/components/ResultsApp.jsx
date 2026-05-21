@@ -7,6 +7,7 @@ import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
 import {
   fetchRecommendedDestinations,
+  filterConfig,
   getFallbackDestinations,
   getFiltersFromSearch,
 } from "./api";
@@ -51,44 +52,60 @@ export default function ResultsApp() {
     };
   }, []);
 
-  const activeFilterSummary = useMemo(() => {
-    const entries = Object.entries(filters).filter(([, value]) => value);
-
-    if (entries.length === 0) {
-      return "all real-life destinations";
-    }
-
-    return entries
-      .map(([key, value]) => `${formatOptionLabel(key)}: ${formatOptionLabel(value)}`)
-      .join(" :: ");
+  const activeFilterEntries = useMemo(() => {
+    return filterConfig
+      .map((filter) => [filter.label, filters[filter.key]])
+      .filter(([, value]) => value);
   }, [filters]);
 
   return (
     <>
       <div className="page-noise" aria-hidden="true"></div>
-      <Header />
+      <Header currentPath="/results" />
       <main className="myspace-shell results-shell">
         <LeftSidebar />
 
         <section className="main-column" aria-label="Ranked Dreamroute results">
           <section className="results-hero panel" aria-labelledby="results-title">
-            <p>\ RANKED DESTINATION OUTPUT</p>
-            <h1 id="results-title">THE BEST CITIES FOR YOU ARE:</h1>
-            <span>{activeFilterSummary}</span>
+            <div className="results-kicker-row">
+              <p>\ PERSONALIZED ROUTE GENERATED</p>
+              <span>TOP 3 MATCHES</span>
+            </div>
+            <h1 id="results-title">YOUR DREAMROUTE RECOMMENDATIONS</h1>
+            <div className="filter-chip-row" aria-label="Selected recommendation filters">
+              {activeFilterEntries.length > 0 ? (
+                activeFilterEntries.map(([label, value]) => (
+                  <span className="filter-chip" key={`${label}-${value}`}>
+                    <strong>{formatOptionLabel(label)}</strong>
+                    {formatOptionLabel(value)}
+                  </span>
+                ))
+              ) : (
+                <span className="filter-chip">
+                  <strong>Mode</strong>
+                  All destination signals
+                </span>
+              )}
+            </div>
           </section>
 
-          <FilterPanel compact initialFilters={filters} />
-
           <section className="results-panel panel" aria-labelledby="results-grid-title">
-            <div className="section-title-row">
+            <div className="section-title-row results-title-row">
               <div>
-                <p>\ LIVE DREAMROUTE RESULTS</p>
-                <h2 id="results-grid-title">{loading ? "receiving signal..." : apiMessage}</h2>
+                <p>\ RECOMMENDATIONS READY</p>
+                <h2 id="results-grid-title">{loading ? "ranking your matches..." : apiMessage}</h2>
               </div>
-              <a href="/">back home &gt;&gt;</a>
+              <a href="/">start over &gt;&gt;</a>
             </div>
             <DestinationGrid destinations={results} limit={3} />
           </section>
+
+          <FilterPanel
+            compact
+            buttonLabel="UPDATE RECOMMENDATIONS"
+            initialFilters={filters}
+            title="REFINE YOUR SEARCH"
+          />
         </section>
 
         <RightSidebar />
