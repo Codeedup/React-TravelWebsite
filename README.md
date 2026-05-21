@@ -16,11 +16,11 @@ This project is organized for submission using the requested folder layout:
 
 - `setup/setup.ipynb`
 - `setup/updater.ipynb`
+- `setup/travel_planner.db`
 
 ### `/apiserver/`
 
 - `apiserver/server.ipynb`
-- `apiserver/data/travel_planner.db`
 
 ### `/messy_myspace/`
 
@@ -52,7 +52,7 @@ The frontend expects the API at `http://127.0.0.1:5001`.
 ## Database Build Flow
 
 Run `setup/setup.ipynb` first to create the canonical SQLite schema, then run
-`setup/updater.ipynb` to populate `apiserver/data/travel_planner.db`. The Flask
+`setup/updater.ipynb` to populate `setup/travel_planner.db`. The Flask
 server reads that database directly.
 
 ## Generated Files

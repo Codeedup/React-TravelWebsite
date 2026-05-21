@@ -56,7 +56,6 @@ export default function DestinationCard({ destination, index = 0 }) {
 
         <div className="card-footer">
           <small>{getWeatherLine(destination) || "weather signal pending"}</small>
-          <a href="/results">view details &gt;&gt;</a>
         </div>
       </div>
     </article>
