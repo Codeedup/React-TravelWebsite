@@ -2,12 +2,14 @@ export default function LeftSidebar() {
   return (
     <aside className="left-rail" aria-label="Traveler profile and system widgets">
       <section className="brand-card panel">
-        <div className="brand-star" aria-hidden="true"></div>
         <a className="dream-logo" href="/" aria-label="DREAMROUTE home">
-          DREAMROUTE_
+          <img
+            alt="DREAMROUTE travel recommender"
+            className="dream-logo-image"
+            src="/assets/ui_images/dreamroute_logo_transparent.png"
+          />
         </a>
-        <p>travel recommender</p>
-        <strong>WE DON'T SELL TRIPS. WE REVEAL POSSIBILITIES.</strong>
+      
       </section>
 
       <section className="profile-card panel" aria-labelledby="profile-title">

@@ -306,23 +306,24 @@ img {
     linear-gradient(135deg, rgba(167, 255, 87, 0.08), transparent 58%);
 }
 
-.brand-star {
-  width: 62px;
-  height: 62px;
-  margin-bottom: 10px;
-  clip-path: polygon(50% 0, 58% 36%, 95% 14%, 70% 48%, 100% 62%, 62% 62%, 72% 100%, 50% 68%, 28% 100%, 38% 62%, 0 62%, 30% 48%, 5% 14%, 42% 36%);
-  background: var(--pink);
-  box-shadow: 0 0 18px rgba(255, 93, 200, 0.45);
+.dream-logo {
+  display: grid;
+  align-items: center;
+  height: 148px;
+  margin: -10px -14px 14px;
+  overflow: hidden;
 }
 
-.dream-logo {
-  display: block;
-  color: var(--ink);
-  font-size: 2.7rem;
-  font-weight: 900;
-  line-height: 0.86;
-  text-shadow: 2px 0 var(--pink), -2px 0 var(--cyan), 0 0 12px rgba(255, 255, 255, 0.2);
-  text-transform: uppercase;
+.dream-logo-image {
+  width: 114%;
+  max-width: none;
+  height: auto;
+  margin-left: -7%;
+  transform: translateY(2px);
+  filter:
+    drop-shadow(2px 0 0 rgba(255, 93, 200, 0.45))
+    drop-shadow(-2px 0 0 rgba(85, 247, 255, 0.3))
+    drop-shadow(0 0 14px rgba(255, 255, 255, 0.16));
 }
 
 .brand-card p {
@@ -1704,7 +1705,7 @@ img {
   }
 
   .dream-logo {
-    font-size: 2.25rem;
+    height: 132px;
   }
 
   .results-hero h1,
