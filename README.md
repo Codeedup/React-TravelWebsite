@@ -16,15 +16,16 @@ This project is organized for submission using the requested folder layout:
 
 - `setup/setup.ipynb`
 - `setup/updater.ipynb`
+- `setup/datatables_dylan_test.ipynb` (legacy development/test notebook)
 - `setup/travel_planner.db`
 
 ### `/apiserver/`
 
 - `apiserver/server.ipynb`
 
-### `/messy_myspace/`
+### `/apiviewer/`
 
-- Astro/React frontend for the DREAMROUTE messy MySpace interface.
+- Astro/React frontend for the DREAMROUTE interface.
 
 ### `/report/`
 
@@ -42,7 +43,7 @@ Run the Flask API manually from the notebook:
 Run the Astro/React frontend from the frontend folder:
 
 ```powershell
-cd messy_myspace
+cd apiviewer
 npm install
 npm run dev
 ```
@@ -57,4 +58,4 @@ server reads that database directly.
 
 ## Generated Files
 
-Generated folders such as `node_modules/`, `.astro/`, `dist/`, `.npm-cache/`, and log files are not listed above as source files. They can be recreated by running the install/build/dev commands.
+Generated folders such as `node_modules/`, `.astro/`, `dist/`, `.npm-cache/`, and log files are not listed above as source files and should not be included in the final submission zip. They can be recreated from `apiviewer/package.json` and `apiviewer/package-lock.json` by running `npm install`, and `dist/` can be recreated with `npm run build`.
