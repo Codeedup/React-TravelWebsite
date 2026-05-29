@@ -91,9 +91,25 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 img {
   display: block;
   max-width: 100%;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .top-chrome,
@@ -179,7 +195,7 @@ img {
 
 .top-chrome {
   display: grid;
-  grid-template-columns: 270px minmax(0, 1fr) 190px;
+  grid-template-columns: 270px minmax(0, 1fr) 136px 190px;
   gap: 12px;
   align-items: center;
   width: min(100% - 20px, 1760px);
@@ -259,6 +275,55 @@ img {
   background: var(--acid);
   box-shadow: 0 0 18px rgba(167, 255, 87, 0.35);
   outline: none;
+}
+
+.font-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line-soft);
+  color: var(--paper);
+  background: rgba(0, 0, 0, 0.34);
+  font-size: 0.72rem;
+}
+
+.font-controls > span[aria-hidden="true"] {
+  color: var(--cyan);
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.font-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  min-height: 30px;
+  border: 1px solid rgba(235, 226, 201, 0.48);
+  color: var(--acid);
+  background: rgba(0, 0, 0, 0.44);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.font-controls button:hover,
+.font-controls button:focus-visible {
+  border-color: var(--acid);
+  color: #101705;
+  background: var(--acid);
+  box-shadow: 0 0 16px rgba(167, 255, 87, 0.28);
+  outline: none;
+}
+
+.font-controls button:disabled {
+  border-color: rgba(235, 226, 201, 0.18);
+  color: var(--muted);
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: none;
+  opacity: 0.68;
 }
 
 .connection-box {
@@ -1240,6 +1305,10 @@ img {
   padding: 0 18px 18px;
 }
 
+.database-console {
+  min-width: 0;
+}
+
 .info-copy {
   display: grid;
   gap: 12px;
@@ -1387,14 +1456,18 @@ img {
 }
 
 .database-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
+  overflow-y: hidden;
   border: 1px solid rgba(235, 226, 201, 0.34);
   background: rgba(0, 0, 0, 0.46);
 }
 
 .database-table {
-  width: 100%;
-  min-width: 760px;
+  width: max-content;
+  min-width: max(100%, 760px);
   border-collapse: collapse;
   font-size: 0.72rem;
 }
@@ -1573,6 +1646,10 @@ img {
 
   .top-chrome {
     grid-template-columns: 1fr;
+  }
+
+  .font-controls {
+    justify-content: flex-start;
   }
 
   .connection-box {

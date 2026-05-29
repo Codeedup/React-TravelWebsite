@@ -1,4 +1,4 @@
-// 
+// This populates our dropdown menu's in case the api is not connected
 
 export const fallbackFilterOptions = {
   activity: ["architecture", "art", "beach", "history"],
