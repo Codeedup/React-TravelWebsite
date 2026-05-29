@@ -1,3 +1,5 @@
+// This populates our dropdown menu's in case the api is not connected
+
 export const fallbackFilterOptions = {
   activity: ["architecture", "art", "beach", "history"],
   cost: ["cheap", "expensive", "medium"],
@@ -24,7 +26,7 @@ export const fallbackFilterOptions = {
     "Sun & Sand",
     "Urban Explorer",
   ],
-  weather: ["Hot", "Mild", "Snowy"],
+  weather: ["Hot", "Mild", "Cold"],
 };
 
 export const fallbackDestinations = [
