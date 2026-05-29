@@ -4,58 +4,64 @@ This project is organized for submission using the requested folder layout:
 
 ```text
 /
-+-- setup/
-+-- apiserver/
-+-- apiviewer/
-+-- report/
+├── back-end/
+│   ├── app.py              -> Main Flask API script
+│   ├── requirements.txt    -> Python dependencies
+│   └── testApi.ipynb       -> Jupyter notebook for testing logic
+│
+├── front-end/
+│   ├── package.json
+│   ├── public/             -> Static assets (images, fonts)
+│   └── src/
+│       ├── components/     -> React components grouped by feature.
+│       │   ├── catAPI/     -> catGenerator.jsx & styles
+│       │   ├── catmotions/ -> catmotions.jsx & styles
+│       │   ├── header/     -> Navigation/Header UI
+│       │   └── testAPI/    -> Initial test components
+│       │ 
+│       ├── layouts/        -> Main Layout.astro (global wrapper)
+│       │ 
+│       └── pages/          -> Astro routes
+│           ├── index.astro
+│           ├── catGenerator.astro
+│           └── catmotions.astro
 ```
 
-## File List
+## Notes from Astro team
 
-### `/setup/`
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-- `setup/setup.ipynb`
-- `setup/updater.ipynb`
-- `setup/datatables_dylan_test.ipynb` (legacy development/test notebook)
-- `setup/travel_planner.db`
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-### `/apiserver/`
+Any static assets, like images, can be placed in the `public/` directory.
 
-- `apiserver/server.ipynb`
+## Commands
 
-### `/apiviewer/`
+These commands are mandatory to be able to run this app on your machine. They will have to be run on different terminals. The first two npm commands will need to be executed inside the main directory, while the pip3 and python will need to be executed inside the backend folder.
 
-- Astro/React frontend for the DREAMROUTE interface.
+| Command                           | Action                                           |
+| :-------------------------------- | :----------------------------------------------- |
+| `npm install`                     | Installs dependencies                            |
+| `npm run dev`                     | Starts local dev server at `localhost:4321`      |
+| `pip3 install -r requirements.txt`| Reads the txt and install all the python tools   |
+| `python3 app.py`                  | Starts local Python API at `localhost:5000`      |
 
-### `/report/`
+These are the commands I used while creating the app: (I don't have enough patient left to write it as above ) <br><br>
 
-- Add written report and video documentation files here.
+npx astro add react -> to add react <br><br>
 
-## Run Commands
+pip3 install flask flask-cores -> to install flask <br><br>
 
-Run the Flask API manually from the notebook:
+pip3 freeze > requirements.txt -> takes a snapshot of the installed tools and saved them in a txt file to install when needed <br><br>
 
-1. Open `apiserver/server.ipynb`.
-2. Run the setup/install cell if Flask or Flask-CORS is not installed.
-3. Run the Flask app cell.
-4. Keep the notebook kernel running while using the frontend.
 
-Run the Astro/React frontend from the frontend folder:
+## Useful links
 
-```powershell
-cd apiviewer
-npm install
-npm run dev
-```
-
-The frontend expects the API at `http://127.0.0.1:5001`.
-
-## Database Build Flow
-
-Run `setup/setup.ipynb` first to create the canonical SQLite schema, then run
-`setup/updater.ipynb` to populate `setup/travel_planner.db`. The Flask
-server reads that database directly.
-
-## Generated Files
-
-Generated folders such as `node_modules/`, `.astro/`, `dist/`, `.npm-cache/`, and log files are not listed above as source files and should not be included in the final submission zip. They can be recreated from `apiviewer/package.json` and `apiviewer/package-lock.json` by running `npm install`, and `dist/` can be recreated with `npm run build`.
+For React I used -> https://react.dev/learn/writing-markup-with-jsx <br><br>
+For colours I used -> https://coolors.co/palette/606c38-283618-fefae0-dda15e-bc6c25 <br><br>
+To revise the css -> https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout <br><br>
+I also used some parts from the previous project -> https://git.arts.ac.uk/24032492/TSD <br><br>
+For free APIs: https://free-apis.github.io/#/browse <br><br>
+Cataas API: https://cataas.com <br><br>
+Json specification: https://www.json.org/json-en.html <br><br>
+For fetching data using API: https://docs.astro.build/en/guides/data-fetching/
