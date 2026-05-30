@@ -1,18 +1,17 @@
-export const destinationImageMap = {
-  amsterdam: "/assets/destinations/amsterdam.jpg",
-  athens: "/assets/destinations/athens.jpg",
-  barcelona: "/assets/destinations/barcelona.jpg",
-  berlin: "/assets/destinations/berlin.jpg",
-  dubrovnik: "/assets/destinations/dubrovnik.jpg",
-  edinburgh: "/assets/destinations/edinburgh.jpg",
-  istanbul: "/assets/destinations/istanbul.jpg",
-  lisbon: "/assets/destinations/lisbon.jpg",
-  paris: "/assets/destinations/paris.jpg",
-  rome: "/assets/destinations/rome.jpg",
-};
+import destinationImageCredits from "./destinationImageCredits.json";
 
 export function slugifyDestination(name = "") {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+export function getDestinationImageSrc(name = "") {
+  const slug = slugifyDestination(name);
+  return slug ? `/assets/destinations/${slug}.jpg` : "";
+}
+
+export function getDestinationImageCredit(name = "") {
+  const slug = slugifyDestination(name);
+  return destinationImageCredits[slug] || null;
 }
 
 export function formatOptionLabel(value = "") {
