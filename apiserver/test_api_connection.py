@@ -14,34 +14,34 @@ endpoints_to_test = [
     "/api/database"
 ]
 
-print(f"Starting API health check against {BASE_URL}...\n")
+print(f"Starting api checks for: {BASE_URL}...\n")
 print("-" * 50)
 
 for endpoint in endpoints_to_test:
     url = f"{BASE_URL}{endpoint}"
     
     try:
-        # Send a GET request with a 5-second timeout
+        # Send a GET request with a 5 second timeout
         response = requests.get(url, timeout=5)
         
         # Check if the HTTP status code is 200 (OK)
         if response.status_code == 200:
-            # Optional: Ensure it actually returned JSON
+            # Ensure it actually returned JSON
             try:
                 data = response.json()
-                print(f"[OK] {endpoint} is working. (Returned {len(data)} items/keys)")
+                print(f"OK: {endpoint} is working. (Returned {len(data)} items/keys)")
             except ValueError:
-                print(f"[WARNING] {endpoint} is working (200 OK), but did not return valid JSON.")
+                print(f"Warning! {endpoint} is working, but did not return valid JSON.")
         else:
-            print(f"[DOESN'T WORK] {endpoint} returned status code: {response.status_code}")
+            print(f"Doesn't work! {endpoint} returned status code: {response.status_code}")
             
     except requests.exceptions.ConnectionError:
-        print(f"[FATAL ERROR] Could not connect to {BASE_URL}.")
-        print("Are you sure your Flask server is currently running?")
+        print(f"Error: Could not connect to {BASE_URL}.")
+        print("Check the flask server it might not be on")
         break 
         
     except requests.exceptions.Timeout:
-        print(f"[DOESN'T WORK] {endpoint} timed out after 5 seconds.")
+        print(f"Doesn't wprk {endpoint} timed out after 5 seconds.")
 
 print("-" * 50)
 print("Testing complete.")
