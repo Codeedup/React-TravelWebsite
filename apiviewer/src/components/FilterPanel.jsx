@@ -51,7 +51,7 @@ export default function FilterPanel({
       } catch (error) {
         if (isMounted) {
           setOptions(normalizeFilterOptions(fallbackFilterOptions));
-          setStatus("Flask offline - showing local filter ghosts");
+          setStatus("Flask offline - showing local fallback filters");
         }
       }
     }

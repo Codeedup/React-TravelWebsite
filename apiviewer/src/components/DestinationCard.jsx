@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  destinationImageMap,
   formatOptionLabel,
+  getDestinationImageCredit,
+  getDestinationImageSrc,
   getMatchPercent,
   getWeatherLine,
   slugifyDestination,
@@ -10,7 +11,9 @@ import {
 export default function DestinationCard({ destination, index = 0 }) {
   const [imageFailed, setImageFailed] = useState(false);
   const slug = slugifyDestination(destination.destination);
-  const imageSrc = destinationImageMap[slug];
+  const imageSrc = getDestinationImageSrc(destination.destination);
+  const imageCredit = getDestinationImageCredit(destination.destination);
+  const imageAlt = imageCredit?.alt || `${destination.destination}, ${destination.country}`;
   const tags = [
     destination.cost,
     destination.weather_band,
@@ -18,12 +21,16 @@ export default function DestinationCard({ destination, index = 0 }) {
     ...(destination.vibes || []).slice(0, 2),
   ].filter(Boolean);
 
+  useEffect(() => {
+    setImageFailed(false);
+  }, [imageSrc]);
+
   return (
     <article className={`destination-card destination-${slug || "unknown"}`}>
       <div className="destination-media">
         {imageSrc && !imageFailed && (
           <img
-            alt={`${destination.destination}, ${destination.country}`}
+            alt={imageAlt}
             src={imageSrc}
             onError={() => setImageFailed(true)}
           />
@@ -56,6 +63,27 @@ export default function DestinationCard({ destination, index = 0 }) {
 
         <div className="card-footer">
           <small>{getWeatherLine(destination) || "weather signal pending"}</small>
+          {imageCredit && (
+            <small className="image-credit">
+              Photo:{" "}
+              {imageCredit.photographer_url && imageCredit.photographer ? (
+                <a href={imageCredit.photographer_url} rel="noreferrer" target="_blank">
+                  {imageCredit.photographer}
+                </a>
+              ) : (
+                imageCredit.photographer || imageCredit.provider
+              )}
+              {imageCredit.photo_url && (
+                <>
+                  {" "}
+                  /{" "}
+                  <a href={imageCredit.photo_url} rel="noreferrer" target="_blank">
+                    {imageCredit.provider}
+                  </a>
+                </>
+              )}
+            </small>
+          )}
         </div>
       </div>
     </article>

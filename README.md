@@ -54,6 +54,16 @@ pip3 install flask flask-cores -> to install flask <br><br>
 
 pip3 freeze > requirements.txt -> takes a snapshot of the installed tools and saved them in a txt file to install when needed <br><br>
 
+## Destination images
+
+Destination cards load static files from `apiviewer/public/assets/destinations` using the city slug, for example `paris.jpg`. To fill in missing destination images with the Pexels API, create `setup/.env` from `setup/.env.example`, add your own `PEXELS_API_KEY`, then run:
+
+```bash
+python setup/fetch_destination_images.py
+```
+
+The script keeps the existing curated images, downloads only missing city images, and writes Pexels attribution metadata for generated assets.
+
 
 ## Useful links
 
