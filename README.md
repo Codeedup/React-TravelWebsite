@@ -1,83 +1,72 @@
-# Project Submission Structure
+## DREAMROUTE_
+The app of tomorrow, today! Have you ever spent a lot of time scouring the internet for the perfect holiday destination? Look no further; the DREAMROUTE_ app will help you find your dream holiday destination! The only thing you have to do is answer five simple questions, and you'll have three options to choose from.
 
-This project is organized for submission using the requested folder layout:
+## Project Description
+This project is part of a class assignment for the Full-Stack Development module. The resulting app is the creation of hard work from Dylan Moffet, Nicusor Ghinea, and Theo Bailey. We used Astro as the main framework for the project, React for the frontend, Python with SQL to develop the database, and finally, Python with Flask to create our own API that communicates directly with our Astro project.
+
+The following readme has the following sections:
+1) Project Structure
+2) How to run and use the app
+3) Data base visualiation
+4) References
+
+## Project Structure
 
 ```text
-/
-├── back-end/
-│   ├── app.py              -> Main Flask API script
-│   ├── requirements.txt    -> Python dependencies
-│   └── testApi.ipynb       -> Jupyter notebook for testing logic
-│
-├── front-end/
-│   ├── package.json
-│   ├── public/             -> Static assets (images, fonts)
-│   └── src/
-│       ├── components/     -> React components grouped by feature.
-│       │   ├── catAPI/     -> catGenerator.jsx & styles
-│       │   ├── catmotions/ -> catmotions.jsx & styles
-│       │   ├── header/     -> Navigation/Header UI
-│       │   └── testAPI/    -> Initial test components
-│       │ 
-│       ├── layouts/        -> Main Layout.astro (global wrapper)
-│       │ 
-│       └── pages/          -> Astro routes
-│           ├── index.astro
-│           ├── catGenerator.astro
-│           └── catmotions.astro
+.
+├── apiserver/                  # Python backend API (Flask)
+│   ├── notebooks/              # Utility and testing notebooks
+│   ├── server.py               # Main Flask API entry point
+│   └── test_api_connection.py  # Health check script for endpoints
+├── apiviewer/                  # Astro frontend application
+│   ├── public/                 # Static assets
+│   └── src/                    # Frontend source code
+├── report/                     # Project documentation and evidence
+│   ├── photo_evidences/        # Supporting images
+│   └── video/                  # Video demonstrations
+└── setup/                      # Database schema and population logic
+    ├── notebooks/              # Utility and testing notebooks
+    ├── db_populate.py          # Script to seed the database via APIs
+    ├── setup.py                # Script to initialize database tables
+    └── travel_planner.db       # SQLite database file
+```
+## How to run and use the app
+
+To run this application, you will firstly need to install all the dependency then you'll use two separate terminal windows/tabs to run the project.
+1. Install dependencies
+You need to be in the main directory, while there run this command in the terminal:
+
+```text
+pip3 install -r requirements.txt    # Installs all the libraries for python, such as sqlalchemy
 ```
 
-## Notes from Astro team
+2. Frontend Setup (Terminal 1 - Root Directory)
+Navigate to the root directory where the main package.json is and run the following commands:
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+```text
+npm install	                # Installs all frontend dependencies
+npm run dev	                # Starts the local dev server at http://localhost:4321
+```
+3. Backend Setup (Terminal 2 - apiserver Directory)
+Navigate into the apiserver/ folder and run this commands:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## Commands
-
-These commands are mandatory to be able to run this app on your machine. They will have to be run on different terminals. The first two npm commands will need to be executed inside the main directory, while the pip3 and python will need to be executed inside the backend folder.
-
-| Command                           | Action                                           |
-| :-------------------------------- | :----------------------------------------------- |
-| `npm install`                     | Installs dependencies                            |
-| `npm run dev`                     | Starts local dev server at `localhost:4321`      |
-| `pip3 install -r requirements.txt`| Reads the txt and install all the python tools   |
-| `python3 app.py`                  | Starts local Python API at `localhost:5000`      |
-
-These are the commands I used while creating the app: (I don't have enough patient left to write it as above ) <br><br>
-
-npx astro add react -> to add react <br><br>
-
-pip3 install flask flask-cores -> to install flask <br><br>
-
-pip3 freeze > requirements.txt -> takes a snapshot of the installed tools and saved them in a txt file to install when needed <br><br>
-
-## Destination images
-
-Destination cards load static files from `apiviewer/public/assets/destinations` using the city slug, for example `paris.jpg`. To fill in missing destination images with the Pexels API, create `setup/.env` from `setup/.env.example`, add your own `PEXELS_API_KEY`, then run:
-
-```bash
-python setup/fetch_destination_images.py
+```text
+pip3 install -r requirements.txt	# Installs all necessary Python libraries
+python3 server.py	                # Starts the Python API at http://localhost:5001
 ```
 
-The script keeps the existing curated images, downloads only missing city images, and writes Pexels attribution metadata for generated assets.
+4. Database
+If you need to reset or populate the database, use the scripts located in the setup/ folder and run the following commands:
 
+```text
+python3 setup/setup.py              # Create tables
+python3 setup/db_populate.py        # Populate the db
+```
 
-## Useful links
+After you have done all of the above, open your favourite browser and go to the localhost:4321, or the specific localhost from your console to navigate our website.
 
-For React I used -> https://react.dev/learn/writing-markup-with-jsx <br><br>
-For colours I used -> https://coolors.co/palette/606c38-283618-fefae0-dda15e-bc6c25 <br><br>
-To revise the css -> https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout <br><br>
-I also used some parts from the previous project -> https://git.arts.ac.uk/24032492/TSD <br><br>
-For free APIs: https://free-apis.github.io/#/browse <br><br>
-Cataas API: https://cataas.com <br><br>
-Json specification: https://www.json.org/json-en.html <br><br>
-For fetching data using API: https://docs.astro.build/en/guides/data-fetching/
-
-
-# DREAMROUTE Database Schema
+## Database Visualisation Table
+Our database is formed of 7 tables. The main table, "Destinations", stores core city details. To store other relevant data, we are using the "Cost_Profiles", "Weather_Monthly", "Activities", and "Travel_Vibes" tables to provide specific, individual data. Finally, we use two junction tables, "Destination_Vibes" and "Destination_Activities", which contain the foreign keys needed to efficiently connect and map this data together.
 
 ```mermaid
 erDiagram
@@ -130,3 +119,23 @@ erDiagram
     DESTINATIONS ||--o{ DESTINATION_VIBES : "has vibes"
     TRAVEL_VIBES ||--o{ DESTINATION_VIBES : "tags destinations"
 ```
+
+## References
+
+## References & Technologies
+
+| Category | Resource | Purpose |
+| :--- | :--- | :--- |
+| **Frontend** | [Astro](https://astro.build/) & [React](https://react.dev/) | Framework and component architecture |
+| **Backend** | [Flask](https://flask.palletsprojects.com/) | Python API framework |
+| **Database** | [SQLAlchemy](https://www.sqlalchemy.org/) & [SQLite](https://www.sqlite.org/) | ORM and relational storage |
+| **Data (Geo)**| [Open-Meteo Geocoding API](https://open-meteo.com/) | City coordinates and population data |
+| **Data (Climate)**| [Open-Meteo Archive API](https://open-meteo.com/) | Historical temperature and rainfall data |
+| **Data (Info)** | [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/) | Automated city descriptions |
+| **Data Reading** | [JSON](https://www.json.org/) | Data exchange specifications |
+| **Design** | [MDN CSS Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout) | CSS Grid layouts |
+
+
+## Licence
+
+This project is licensed for educational use and not to be used as a product that can generate revenue.
