@@ -8,16 +8,16 @@ import RightSidebar from "./RightSidebar";
 import {
   fetchRecommendedDestinations,
   filterConfig,
-  getFallbackDestinations,
   getFiltersFromSearch,
 } from "./api";
 import { formatOptionLabel } from "./destinationUtils";
 
 export default function ResultsApp() {
   const [filters, setFilters] = useState({});
-  const [results, setResults] = useState(getFallbackDestinations());
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [apiMessage, setApiMessage] = useState("");
+  const [apiUnavailable, setApiUnavailable] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -32,11 +32,13 @@ export default function ResultsApp() {
         if (isMounted) {
           setResults(nextResults);
           setApiMessage("ranked by live Flask API");
+          setApiUnavailable(false);
         }
       } catch (error) {
         if (isMounted) {
-          setResults(getFallbackDestinations());
-          setApiMessage("Flask offline - fallback ranking loaded");
+          setResults([]);
+          setApiMessage("Flask API offline");
+          setApiUnavailable(true);
         }
       } finally {
         if (isMounted) {
@@ -57,6 +59,10 @@ export default function ResultsApp() {
       .map((filter) => [filter.label, filters[filter.key]])
       .filter(([, value]) => value);
   }, [filters]);
+
+  const emptyResultsMessage = apiUnavailable
+    ? "Connect API to get results"
+    : "No matching destinations came through the wire.";
 
   return (
     <>
@@ -97,7 +103,11 @@ export default function ResultsApp() {
               </div>
               <a href="/">start over &gt;&gt;</a>
             </div>
-            <DestinationGrid destinations={results} limit={3} />
+            {loading ? (
+              <p className="empty-results">ranking your matches...</p>
+            ) : (
+              <DestinationGrid destinations={results} emptyMessage={emptyResultsMessage} limit={3} />
+            )}
           </section>
 
           <FilterPanel
