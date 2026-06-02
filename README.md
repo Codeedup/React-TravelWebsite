@@ -1,8 +1,16 @@
 ## DREAMROUTE_
-The app of tomorrow, today! Have you ever spent a lot of time scouring the internet for the perfect holiday destination? Look no further; the DREAMROUTE_ app will help you find your dream holiday destination! The only thing you have to do is answer five simple questions, and you'll have three options to choose from.
+The app of tomorrow, today! Have you ever spent a lot of time scouring the internet for the perfect holiday destination? Look no further, the DREAMROUTE app will help you find your dream holiday destination! The only thing you have to do is answer five simple questions, and you'll have three options to choose from.
 
 ## Project Description
 This project is part of a class assignment for the Full-Stack Development module. The resulting app is the creation of hard work from Dylan Moffet, Nicusor Ghinea, and Theo Bailey. We used Astro as the main framework for the project, React for the frontend, Python with SQL to develop the database, and finally, Python with Flask to create our own API that communicates directly with our Astro project.
+
+## Report Files
+Group-report-fullstack: Our short description of the project
+Group Contribution - Full Stack Development: Log of all our meetings and discussions
+photo_evidences: Visuals of our project throughout development
+travel_destinations.png: Mermaid diagram showing database desing
+individual reflection: Our own individual reflection
+video: Quick video detailing how the project works
 
 The following readme has the following sections:
 1) Project Structure
@@ -32,7 +40,7 @@ The following readme has the following sections:
 ```
 ## How to run and use the app
 
-To run this application, you will firstly need to install all the dependency then you'll use two separate terminal windows/tabs to run the project.
+To run this application, you will firstly need to install all the dependencies then you'll use two separate terminal windows/tabs to run the project.
 1. Install dependencies
 You need to be in the main directory, while there run this command in the terminal:
 
@@ -48,7 +56,7 @@ npm install	                # Installs all frontend dependencies
 npm run dev	                # Starts the local dev server at http://localhost:4321
 ```
 3. Backend Setup (Terminal 2 - apiserver Directory)
-Navigate into the apiserver/ folder and run this commands:
+Navigate into the apiserver/ folder and run these commands:
 
 ```text
 pip3 install -r requirements.txt	# Installs all necessary Python libraries
@@ -120,7 +128,6 @@ erDiagram
     TRAVEL_VIBES ||--o{ DESTINATION_VIBES : "tags destinations"
 ```
 
-## References
 
 ## References & Technologies
 
