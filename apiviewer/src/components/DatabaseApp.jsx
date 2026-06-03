@@ -5,12 +5,15 @@ import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
 import { API_BASE_URL, fetchDatabaseSnapshot } from "./api";
 
+//this grabs our database and shows it in a clean way
+
+
 function titleize(value = "") {
-  return value.replace(/_/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+  return value.replace(/_/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase()); // convert database names into clean ones for table
 }
 
 function formatCell(value) {
-  if (value === null || value === undefined) {
+  if (value === null || value === undefined) { // if any of the database is missing replace it with NULL
     return "NULL";
   }
 
@@ -34,7 +37,7 @@ export default function DatabaseApp() {
   const [activeTableName, setActiveTableName] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+//fetches the live database
   useEffect(() => {
     let isMounted = true;
 
@@ -50,7 +53,7 @@ export default function DatabaseApp() {
         }
       } catch (requestError) {
         if (isMounted) {
-          setError(`Flask API offline at ${API_BASE_URL} - database snapshot unavailable`);
+          setError(`Flask API offline at ${API_BASE_URL} - database snapshot unavailable`); 
         }
       } finally {
         if (isMounted) {
@@ -114,7 +117,7 @@ export default function DatabaseApp() {
                       aria-pressed={table.name === activeTable?.name}
                       className={table.name === activeTable?.name ? "active" : ""}
                       key={table.name}
-                      onClick={() => setActiveTableName(table.name)}
+                      onClick={() => setActiveTableName(table.name)} //changes the table name
                       type="button"
                     >
                       <span>{titleize(table.name)}</span>

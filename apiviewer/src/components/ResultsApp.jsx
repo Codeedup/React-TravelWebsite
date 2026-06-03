@@ -21,13 +21,13 @@ export default function ResultsApp() {
 
   useEffect(() => {
     let isMounted = true;
-    const nextFilters = getFiltersFromSearch(window.location.search);
+    const nextFilters = getFiltersFromSearch(window.location.search); //converts URL query string into an object
 
     setFilters(nextFilters);
 
     async function loadResults() {
       try {
-        const nextResults = await fetchRecommendedDestinations(nextFilters);
+        const nextResults = await fetchRecommendedDestinations(nextFilters);//fetch ranked recommendations from Flask
 
         if (isMounted) {
           setResults(nextResults);
@@ -60,7 +60,7 @@ export default function ResultsApp() {
       .filter(([, value]) => value);
   }, [filters]);
 
-  const emptyResultsMessage = apiUnavailable
+  const emptyResultsMessage = apiUnavailable // explains api failure or no matches (doesn't happen at our scale)
     ? "Connect API to get results"
     : "No matching destinations came through the wire.";
 

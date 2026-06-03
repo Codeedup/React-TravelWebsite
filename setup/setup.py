@@ -29,9 +29,9 @@ if DB_PATH.exists():
 # Create the base class that all our ORM (Object-Relational Mapping) models will inherit from
 Base = declarative_base()
 
-# --------------------
+
 # All the tables
-# -------------------
+
 
 # Destination Table
 
@@ -124,9 +124,9 @@ class Travel_Vibe(Base):
     def __repr__(self):
         return f"<Vibe(Name='{self.VibeName}')>"
 
-# ---------------------
+
 # ASSOCIATION TABLES (For Many-to-Many Relationships)
-# ---------------------
+
 
 class Destination_Activity(Base):
     """
@@ -156,9 +156,9 @@ class Destination_Vibe(Base):
     destination = relationship("Destination", back_populates="vibes")
     vibe = relationship("Travel_Vibe", back_populates="destinations")
 
-# ---------------------
+
 # Building the database
-# ---------------
+
 
 try:
     engine = create_engine(f"sqlite:///{DB_PATH.as_posix()}", echo=False)

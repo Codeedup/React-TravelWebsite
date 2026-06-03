@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+//basic header with access to other pages in the website
 const navItems = [
   { label: "HOME", href: "/" },
   { label: "ABOUT", href: "/about" },
@@ -7,6 +8,7 @@ const navItems = [
   { label: "DATABASE", href: "/database" },
 ];
 
+// limits for the font changes you can make
 const MIN_FONT_SIZE = 90;
 const MAX_FONT_SIZE = 125;
 const FONT_STEP = 10;
@@ -20,6 +22,7 @@ function clampFontSize(value) {
   return Math.min(MAX_FONT_SIZE, Math.max(MIN_FONT_SIZE, value));
 }
 
+// changes font size as an accesibility feature
 function applyFontSize(size) {
   document.documentElement.style.fontSize = `${size}%`;
   window.localStorage.setItem(STORAGE_KEY, String(size));

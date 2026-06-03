@@ -47,9 +47,9 @@ cursor.execute("DELETE FROM Destinations")
 cursor.execute("DELETE FROM Weather_Monthly")
 conn.commit()
 
-# ---------------------------------------------------------
+
 # Dictionary to hold realistic cost and landmark data 
-# ---------------------------------------------------------
+
 city_metadata = {
     "Tokyo": {"cost": "Expensive", "landmark": "Senso-ji Temple"},
     "Delhi": {"cost": "Medium", "landmark": "the Red Fort"},
@@ -113,9 +113,9 @@ city_metadata = {
     "Casablanca": {"cost": "Medium", "landmark": "Hassan II Mosque"}
 }
 
-# ---------------------------------------------------------
+
 # Dictionary mapping realistic activities to cities
-# ---------------------------------------------------------
+
 city_activities = {
     "Tokyo": ["Eating local food", "Shopping", "Nightlife and partying", "Theme parks and family fun", "Visiting historical sites"],
     "Delhi": ["Eating local food", "Visiting historical sites", "Exploring street markets"],
@@ -123,9 +123,9 @@ city_activities = {
 
 }
 
-# ---------------------------------------------------------
+
 # Dictionary mapping spiritual/energy vibes to cities
-# ---------------------------------------------------------
+
 city_vibes = {
     "Tokyo": ["Urban Pulse", "High Energy", "Knowledge & Discovery"],
     "Delhi": ["Spiritual Awakening", "High Energy", "Nostalgia & Heritage"],
@@ -133,9 +133,9 @@ city_vibes = {
     # (Leaving the rest dynamically matched to save space, standard fallback handles the rest)
 }
 
-# ------------
+
 # Activities
-# ------------
+
 new_activities = [
     ("Eating local food",), ("Going to the beach",), ("Visiting historical sites",), 
     ("Shopping",), ("Nightlife and partying",), ("Hiking and nature walks",), 
@@ -149,9 +149,9 @@ conn.commit()
 cursor.execute("SELECT ActivityName, ActivityID FROM Activities")
 activity_map = {row[0]: row[1] for row in cursor.fetchall()}
 
-# -------------
+
 # Travel vibes
-# ------------
+
 new_travel_vibes = [
     ("Healthy & Wellness",), ("High Energy",), ("Knowledge & Discovery",), 
     ("Peace & Serenity",), ("Creative Inspiration",), ("Spiritual Awakening",), 
@@ -164,9 +164,9 @@ conn.commit()
 cursor.execute("SELECT VibeName, VibeID FROM Travel_Vibes")
 vibe_map = {row[0]: row[1] for row in cursor.fetchall()}
 
-# ------------------------
+
 # Fetching 50 cities 
-# --------------------
+
 search_terms = list(city_metadata.keys())
 cities_to_add = []
 

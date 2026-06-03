@@ -1,4 +1,8 @@
-export default function LeftSidebar() {
+export default function LeftSidebar() 
+
+    //todo: implement account making - this was never completed due to lack of time. 
+
+{
   return (
     <aside className="left-rail" aria-label="Traveler profile and system widgets">
       <section className="brand-card panel">
@@ -11,6 +15,8 @@ export default function LeftSidebar() {
         </a>
       
       </section>
+
+
 
       <section className="profile-card panel" aria-labelledby="profile-title">
         <PanelTitle id="profile-title">TRAVELER PROFILE - Work in Progress</PanelTitle>

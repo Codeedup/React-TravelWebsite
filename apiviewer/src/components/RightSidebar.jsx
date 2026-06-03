@@ -41,6 +41,61 @@ const passportStamps = [
   },
 ];
 
+const travelOmens = [
+  {
+    quote: '"The journey is the destination. But wifi helps."',
+    cite: "- unknown.exe",
+  },
+  {
+    quote: '"Pack light; the universe charges baggage fees."',
+    cite: "- terminal atlas",
+  },
+  {
+    quote: '"Turn left where the map starts glitching."',
+    cite: "- road oracle",
+  },
+  {
+    quote: '"A missed train is just a portal with better lighting."',
+    cite: "- platform 404",
+  },
+  {
+    quote: '"Follow the weather, then ignore it beautifully."',
+    cite: "- cloud protocol",
+  },
+];
+
+const travelOmenScript = `
+(() => {
+  const travelOmens = ${JSON.stringify(travelOmens)};
+
+  document.querySelectorAll("[data-travel-omen-refresh]").forEach((refreshLink) => {
+    if (refreshLink.dataset.travelOmenReady === "true") {
+      return;
+    }
+
+    refreshLink.dataset.travelOmenReady = "true";
+    refreshLink.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const oracle = refreshLink.closest(".oracle");
+      const quote = oracle?.querySelector("[data-travel-omen-quote]");
+      const cite = oracle?.querySelector("[data-travel-omen-cite]");
+
+      if (!quote || !cite) {
+        return;
+      }
+
+      const currentQuote = quote.textContent;
+      const options = travelOmens.filter((omen) => omen.quote !== currentQuote);
+      const nextOmen = options[Math.floor(Math.random() * options.length)] ?? travelOmens[0];
+
+      quote.textContent = nextOmen.quote;
+      cite.textContent = nextOmen.cite;
+    });
+  });
+})();
+`;
+
 export default function RightSidebar() {
   return (
     <aside className="right-rail" aria-label="Travel widgets">
@@ -50,10 +105,12 @@ export default function RightSidebar() {
           TRAVEL ORACLE
         </h2>
         <blockquote>
-          "The journey is the destination. But wifi helps."
-          <cite>- unknown.exe</cite>
+          <span data-travel-omen-quote>{travelOmens[0].quote}</span>
+          <cite data-travel-omen-cite>{travelOmens[0].cite}</cite>
         </blockquote>
-        <a href="/">refresh omen</a>
+        <a href="/" data-travel-omen-refresh="">
+          refresh omen
+        </a>
       </section>
 
       <section className="panel stamps" aria-labelledby="stamps-title">
@@ -69,6 +126,7 @@ export default function RightSidebar() {
       </section>
 
       
+      <script dangerouslySetInnerHTML={{ __html: travelOmenScript }} />
     </aside>
   );
 }
