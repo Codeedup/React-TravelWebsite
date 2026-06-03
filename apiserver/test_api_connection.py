@@ -1,4 +1,7 @@
 import requests
+#As mentioned in the api_tester.ipynb this is our version of unit testing that verifies every API endpoint
+
+
 
 BASE_URL = "http://127.0.0.1:5001"
 
