@@ -1,3 +1,4 @@
+// this is where users actually pick the filters that will be sent as params
 import { useEffect, useMemo, useState } from "react";
 import {
   buildSearchParams,
@@ -16,7 +17,7 @@ export default function FilterPanel({
   compact = false,
   title = "TELL US WHAT YOU'RE INTO",
   buttonLabel = "FIND MY DESTINATION",
-}) {
+}) {// these states store the dropdown choices, whay the user selected, and whether flask is connected
   const [options, setOptions] = useState(normalizeFilterOptions(fallbackFilterOptions));
   const [selectedFilters, setSelectedFilters] = useState({
     ...emptyFilters,
@@ -24,7 +25,7 @@ export default function FilterPanel({
   });
   const [status, setStatus] = useState("dialing /api/filter-options...");
 
-  useEffect(() => {
+  useEffect(() => { //updates sellected filters 
     setSelectedFilters({
       ...emptyFilters,
       ...initialFilters,
@@ -37,7 +38,7 @@ export default function FilterPanel({
     initialFilters.weather,
   ]);
 
-  useEffect(() => {
+  useEffect(() => { // gets the live filter choices from Flask
     let isMounted = true;
 
     async function loadOptions() {
@@ -68,14 +69,14 @@ export default function FilterPanel({
     [selectedFilters],
   );
 
-  function updateFilter(key, value) {
+  function updateFilter(key, value) {// updates the one selected filter
     setSelectedFilters((currentFilters) => ({
       ...currentFilters,
       [key]: value,
     }));
   }
 
-  function findDestination() {
+  function findDestination() { // turns filters into params
     const params = buildSearchParams(selectedFilters);
     const queryString = params.toString();
 

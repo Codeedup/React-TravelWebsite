@@ -7,6 +7,7 @@ import re
 import sqlite3
 import time
 
+# this file scraped the Pexel's api for images to use for our destination cards. The images are not live they are kept in assets
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATABASE_PATH = REPO_ROOT / "setup" / "travel_planner.db"
@@ -14,7 +15,7 @@ ASSET_DIR = REPO_ROOT / "apiviewer" / "public" / "assets" / "destinations"
 CREDIT_PATH = REPO_ROOT / "apiviewer" / "src" / "components" / "destinationImageCredits.json"
 PEXELS_SEARCH_URL = "https://api.pexels.com/v1/search"
 
-
+# loads the API key from .env so that it isnt exposed to the user.
 def load_env_files():
     for env_path in (REPO_ROOT / ".env", REPO_ROOT / "setup" / ".env"):
         if not env_path.exists():
@@ -30,7 +31,7 @@ def load_env_files():
 
 
 def slugify(value):
-    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-") #get safe files name to put into folder
     return slug
 
 
@@ -69,7 +70,7 @@ def pexels_search(city, country, api_key):
         "per_page": 1,
         "orientation": "landscape",
     })
-    api_request = request.Request(
+    api_request = request.Request( # actual request to pexels for the image 
         f"{PEXELS_SEARCH_URL}?{query_string}",
         headers={
             "Authorization": api_key,
@@ -108,7 +109,7 @@ def pexels_search(city, country, api_key):
         },
     }
 
-
+#download the image
 def download_image(image_url, target_path):
     image_request = request.Request(
         image_url,
@@ -146,7 +147,7 @@ def main():
     credits = read_credits()
     downloaded = 0
     skipped = 0
-
+    # create image file for each destination in the database
     for city, country in read_destinations():
         slug = slugify(city)
         target_path = ASSET_DIR / f"{slug}.jpg"

@@ -1,4 +1,5 @@
-import { fallbackDestinations, fallbackFilterOptions } from "./mockDestinations";
+import { fallbackDestinations, fallbackFilterOptions } from "./mockDestinations"; // incase the api doesn't load
+
 
 export const API_BASE_URL = "http://127.0.0.1:5001";
 
@@ -10,6 +11,7 @@ export const filterConfig = [
   { label: "Vibe", key: "vibe" },
 ];
 
+// create empty filter form when nothing has been passed yet
 export function createEmptyFilters() {
   return filterConfig.reduce((filters, filter) => {
     filters[filter.key] = "";
@@ -17,9 +19,10 @@ export function createEmptyFilters() {
   }, {});
 }
 
+
 export function normalizeFilterOptions(options = {}) {
   return filterConfig.reduce((normalized, filter) => {
-    normalized[filter.key] = options[filter.key] ?? fallbackFilterOptions[filter.key] ?? [];
+    normalized[filter.key] = options[filter.key] ?? fallbackFilterOptions[filter.key] ?? [];//if Flask is broken fallback
     return normalized;
   }, {});
 }
@@ -33,14 +36,15 @@ export function getFiltersFromSearch(search = "") {
   }, {});
 }
 
+// finds query parameters from the selected filters
 export function buildSearchParams(filters = {}) {
   const params = new URLSearchParams();
 
   filterConfig.forEach((filter) => {
-    const value = (filters[filter.key] ?? "").trim();
+    const value = (filters[filter.key] ?? "").trim(); // if nothing is passed give it empty string
 
     if (value) {
-      params.set(filter.key, value);
+      params.set(filter.key, value); 
     }
   });
 
@@ -48,7 +52,7 @@ export function buildSearchParams(filters = {}) {
 }
 
 export async function fetchFilterOptions() {
-  const response = await fetch(`${API_BASE_URL}/api/filter-options`);
+  const response = await fetch(`${API_BASE_URL}/api/filter-options`); // gets dropdowns 
 
   if (!response.ok) {
     throw new Error("Filter options request failed");
@@ -57,7 +61,7 @@ export async function fetchFilterOptions() {
   return normalizeFilterOptions(await response.json());
 }
 
-// API connection point: this calls the existing Flask recommender endpoint.
+// API connection point: this calls the existing Flask recommender endpoint. Builds the main query string
 export async function fetchRecommendedDestinations(filters = {}) {
   const params = buildSearchParams(filters);
   const queryString = params.toString();

@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import sqlite3
 
+#enable flask and allow astro to query
 app = Flask(__name__)
 CORS(app)
 
@@ -49,7 +50,7 @@ def get_db_path():
 
     raise FileNotFoundError(f"Could not find setup/{DATABASE_NAME}.")
 
-
+#open sqlite connection
 def get_db_connection():
     conn = sqlite3.connect(get_db_path())
     conn.row_factory = sqlite3.Row
@@ -64,7 +65,7 @@ def parse_month(value):
     normalized = normalize(value)
     return MONTH_LOOKUP.get(normalized)
 
-
+#convert temps into one of our three ranges
 def weather_band_for_temp(temp):
     if temp is None:
         return ""
@@ -173,6 +174,8 @@ def get_search_payload(selected_filters):
         vibe_names = [vibe["VibeName"] for vibe in vibe_rows]
         weather_band = weather_band_for_temp(chosen_weather["AvgTempC"]) if chosen_weather else ""
 
+
+        #count how many matches to rank them later
         match_count = 0
         if normalize(selected_filters.get("cost", "")) == normalize(row["BudgetLevel"]):
             match_count += 1
@@ -201,6 +204,7 @@ def get_search_payload(selected_filters):
             "selected_filter_count": len(active_filters),
         })
 
+    #show the best destination
     results.sort(key=lambda destination: (-destination["match_count"], destination["destination"]))
     return results
 

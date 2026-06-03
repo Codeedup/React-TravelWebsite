@@ -1,5 +1,5 @@
 export default function Hero() {
-  return (
+  return (// This hero panel has CSS code from chatgpt.
     <section className="hero-window" aria-labelledby="hero-title">
       <div className="wire one" aria-hidden="true"></div>
       <div className="wire two" aria-hidden="true"></div>

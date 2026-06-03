@@ -8,6 +8,7 @@ import {
   slugifyDestination,
 } from "./destinationUtils";
 
+//populates one destination card from the API info with a slugified name, a stored image, and the tags. 
 export default function DestinationCard({ destination, index = 0 }) {
   const [imageFailed, setImageFailed] = useState(false);
   const slug = slugifyDestination(destination.destination);
