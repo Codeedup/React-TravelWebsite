@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   formatOptionLabel,
+  getDestinationImageCredit,
+  getDestinationImageSrc,
   getMatchPercent,
   getWeatherLine,
   slugifyDestination,
@@ -8,10 +10,9 @@ import {
 
 export default function DestinationCard({ destination, index = 0 }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
-  const [imageCredit, setImageCredit] = useState(null);
   const slug = slugifyDestination(destination.destination);
-  const imageSrc = imageUrl;
+  const imageSrc = getDestinationImageSrc(destination.destination);
+  const imageCredit = getDestinationImageCredit(destination.destination);
   const imageAlt = imageCredit?.alt || `${destination.destination}, ${destination.country}`;
   const tags = [
     destination.cost,
@@ -20,50 +21,9 @@ export default function DestinationCard({ destination, index = 0 }) {
     ...(destination.vibes || []).slice(0, 2),
   ].filter(Boolean);
 
-useEffect(() => {
-  setImageFailed(false);
-}, [imageSrc]);
-
-useEffect(() => {
-  if (!destination.destination) return;
-
-  async function fetchImage() {
-    try {
-      const response = await fetch(
-        `https://api.pexels.com/v1/search?query=${encodeURIComponent(
-          destination.destination
-        )}&per_page=1`,
-        {
-          headers: {
-            Authorization: "aiyy5RvXHlOUfDw8oZ2Dj8rPqZFm2JnP9Wj23PVptMpl7883fPmLVdeV",
-          },
-        }
-      );
-      
-      console.log("fetching image for:", destination.destination);
-      console.log("status:", response.status);
-
-      const data = await response.json();
-
-      if (data.photos?.length) {
-        const photo = data.photos[0];
-
-        setImageUrl(photo.src.large);
-
-        setImageCredit({
-          photographer: photo.photographer,
-          photographer_url: photo.photographer_url,
-          photo_url: photo.url,
-          provider: "Pexels",
-        });
-      }
-    } catch (error) {
-      console.error("Pexels image fetch failed:", error);
-    }
-  }
-
-  fetchImage();
-}, [destination.destination]);
+  useEffect(() => {
+    setImageFailed(false);
+  }, [imageSrc]);
 
   return (
     <article className={`destination-card destination-${slug || "unknown"}`}>

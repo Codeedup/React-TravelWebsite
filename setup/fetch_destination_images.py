@@ -21,7 +21,7 @@ def load_env_files():
             continue
 
         for raw_line in env_path.read_text(encoding="utf-8").splitlines():
-            line = raw_line.strip()
+            line = raw_line.strip().lstrip("\ufeff")
             if not line or line.startswith("#") or "=" not in line:
                 continue
 
@@ -74,6 +74,7 @@ def pexels_search(city, country, api_key):
         headers={
             "Authorization": api_key,
             "Accept": "application/json",
+            "User-Agent": "DREAMROUTE destination image fetcher",
         },
     )
 

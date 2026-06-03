@@ -1,8 +1,16 @@
 ## DREAMROUTE_
-The app of tomorrow, today! Have you ever spent a lot of time scouring the internet for the perfect holiday destination? Look no further; the DREAMROUTE_ app will help you find your dream holiday destination! The only thing you have to do is answer five simple questions, and you'll have three options to choose from.
+The app of tomorrow, today! Have you ever spent a lot of time scouring the internet for the perfect holiday destination? Look no further, the DREAMROUTE app will help you find your dream holiday destination! The only thing you have to do is answer five simple questions, and you'll have three options to choose from.
 
 ## Project Description
 This project is part of a class assignment for the Full-Stack Development module. The resulting app is the creation of hard work from Dylan Moffet, Nicusor Ghinea, and Theo Bailey. We used Astro as the main framework for the project, React for the frontend, Python with SQL to develop the database, and finally, Python with Flask to create our own API that communicates directly with our Astro project.
+
+## Report Files
+Group-report-fullstack: Our short description of the project
+Group Contribution - Full Stack Development: Log of all our meetings and discussions
+photo_evidences: Visuals of our project throughout development
+travel_destinations.png: Mermaid diagram showing database desing
+individual reflection: Our own individual reflection
+video: Quick video detailing how the project works
 
 The following readme has the following sections:
 1) Project Structure
@@ -32,38 +40,60 @@ The following readme has the following sections:
 ```
 ## How to run and use the app
 
-To run this application, you will firstly need to install all the dependency then you'll use two separate terminal windows/tabs to run the project.
-1. Install dependencies
-You need to be in the main directory, while there run this command in the terminal:
+To run DREAMROUTE, start from the main project folder. The backend and frontend run in separate terminal windows, so keep one terminal for Flask and another for Astro.
+
+1. Install the Python dependencies
+
+Run this from the project root:
 
 ```text
-pip3 install -r requirements.txt    # Installs all the libraries for python, such as sqlalchemy
+pip install -r requirements.txt
 ```
 
-2. Frontend Setup (Terminal 1 - Root Directory)
-Navigate to the root directory where the main package.json is and run the following commands:
+2. Create and populate the database
+
+These commands reset the SQLite tables and then fill them with destination, weather, activity, vibe, and cost data:
 
 ```text
-npm install	                # Installs all frontend dependencies
-npm run dev	                # Starts the local dev server at http://localhost:4321
+python setup/setup.py
+python setup/db_populate.py
 ```
-3. Backend Setup (Terminal 2 - apiserver Directory)
-Navigate into the apiserver/ folder and run this commands:
+
+3. Start the Flask API
+
+In your first terminal, run this from the project root:
 
 ```text
-pip3 install -r requirements.txt	# Installs all necessary Python libraries
-python3 server.py	                # Starts the Python API at http://localhost:5001
+python apiserver/server.py
 ```
 
-4. Database
-If you need to reset or populate the database, use the scripts located in the setup/ folder and run the following commands:
+The API will run at `http://127.0.0.1:5001`.
+
+4. Start the Astro frontend
+
+In a second terminal, move into the frontend folder and start Astro:
 
 ```text
-python3 setup/setup.py              # Create tables
-python3 setup/db_populate.py        # Populate the db
+cd apiviewer
+npm install
+npm run dev
 ```
 
-After you have done all of the above, open your favourite browser and go to the localhost:4321, or the specific localhost from your console to navigate our website.
+The website will run at `http://localhost:4321`.
+
+5. Open the app
+
+Open your browser and go to:
+
+```text
+http://localhost:4321
+```
+
+If you want to quickly check that the API is responding, keep the Flask server running and use:
+
+```text
+python apiserver/test_api_connection.py
+```
 
 ## Database Visualisation Table
 Our database is formed of 7 tables. The main table, "Destinations", stores core city details. To store other relevant data, we are using the "Cost_Profiles", "Weather_Monthly", "Activities", and "Travel_Vibes" tables to provide specific, individual data. Finally, we use two junction tables, "Destination_Vibes" and "Destination_Activities", which contain the foreign keys needed to efficiently connect and map this data together.
@@ -120,7 +150,6 @@ erDiagram
     TRAVEL_VIBES ||--o{ DESTINATION_VIBES : "tags destinations"
 ```
 
-## References
 
 ## References & Technologies
 

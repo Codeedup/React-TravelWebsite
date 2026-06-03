@@ -1,1 +1,354 @@
-{}
+{
+  "bangkok": {
+    "alt": "Tranquil infinity pool with reflections of the Bangkok skyline under a calm sky.",
+    "photo_url": "https://www.pexels.com/photo/city-of-bangkok-under-white-sky-11262197/",
+    "photographer": "Markus Winkler",
+    "photographer_url": "https://www.pexels.com/@markus-winkler-1430818",
+    "provider": "Pexels",
+    "query": "Bangkok Thailand travel city skyline"
+  },
+  "beijing": {
+    "alt": "Panoramic view of Beijing with the iconic White Dagoba stupa under a cloudy sky.",
+    "photo_url": "https://www.pexels.com/photo/a-city-under-a-cloudy-sky-9431177/",
+    "photographer": "zhang kaiyv",
+    "photographer_url": "https://www.pexels.com/@zhangkaiyv",
+    "provider": "Pexels",
+    "query": "Beijing China travel city skyline"
+  },
+  "bogot": {
+    "alt": "A picturesque view of Bogot\u00e1's skyline featuring modern skyscrapers against a bright blue sky.",
+    "photo_url": "https://www.pexels.com/photo/aerial-photography-of-high-rise-buildings-under-the-blue-sky-13581758/",
+    "photographer": "Juan Pablo Mayorga V\u00e1squez",
+    "photographer_url": "https://www.pexels.com/@juan-pablo-mayorga-vasquez-313369852",
+    "provider": "Pexels",
+    "query": "Bogot\u00e1 Colombia travel city skyline"
+  },
+  "buenos-aires": {
+    "alt": "Aerial view of Buenos Aires skyline showcasing urban architecture and cityscape.",
+    "photo_url": "https://www.pexels.com/photo/panoramic-view-of-buenos-aires-skyline-34437871/",
+    "photographer": "Uriel Lu",
+    "photographer_url": "https://www.pexels.com/@urielluphoto",
+    "provider": "Pexels",
+    "query": "Buenos Aires Argentina travel city skyline"
+  },
+  "cairo": {
+    "alt": "Aerial view of historic mosques with Cairo cityscape backdrop, showcasing Islamic architecture.",
+    "photo_url": "https://www.pexels.com/photo/the-mosque-madrasa-of-sultan-hassan-10586819/",
+    "photographer": "Simon Berger",
+    "photographer_url": "https://www.pexels.com/@simon73",
+    "provider": "Pexels",
+    "query": "Cairo Egypt travel city skyline"
+  },
+  "chicago": {
+    "alt": "Stunning view of Chicago's skyline with Willis Tower under a cloudy sky.",
+    "photo_url": "https://www.pexels.com/photo/buildings-by-lake-in-chicago-18916644/",
+    "photographer": "Qiang Lai",
+    "photographer_url": "https://www.pexels.com/@qiang-lai-774921977",
+    "provider": "Pexels",
+    "query": "Chicago United States travel city skyline"
+  },
+  "delhi": {
+    "alt": "Stunning view of Rashtrapati Bhavan with a clear sky in New Delhi, India, during sunrise.",
+    "photo_url": "https://www.pexels.com/photo/rashtrapati-bhavan-in-new-delhi-19883685/",
+    "photographer": "Ranjeet  Chauhan",
+    "photographer_url": "https://www.pexels.com/@ranjeet-chauhan-485922",
+    "provider": "Pexels",
+    "query": "Delhi India travel city skyline"
+  },
+  "dubai": {
+    "alt": "Dubai Marina with luxury yachts against a skyline of iconic skyscrapers in the morning light.",
+    "photo_url": "https://www.pexels.com/photo/cruise-ships-moored-in-dubai-19612315/",
+    "photographer": "Rockwell branding agency",
+    "photographer_url": "https://www.pexels.com/@rockwell-branding-agency-85164430",
+    "provider": "Pexels",
+    "query": "Dubai United Arab Emirates travel city skyline"
+  },
+  "guangzhou": {
+    "alt": "Illuminated skyscrapers of Guangzhou reflecting on the water under a night sky.",
+    "photo_url": "https://www.pexels.com/photo/illuminated-skyscrapers-reflecting-in-water-at-night-14230236/",
+    "photographer": "Lywin",
+    "photographer_url": "https://www.pexels.com/@lywin-55237728",
+    "provider": "Pexels",
+    "query": "Guangzhou China travel city skyline"
+  },
+  "hong-kong": {
+    "alt": "Panoramic view of Hong Kong's modern skyline featuring iconic skyscrapers and urban architecture.",
+    "photo_url": "https://www.pexels.com/photo/hong-kong-skyline-with-buildings-and-water-26970225/",
+    "photographer": "John Benedict Malong",
+    "photographer_url": "https://www.pexels.com/@jbmalong",
+    "provider": "Pexels",
+    "query": "Hong Kong Unknown Country travel city skyline"
+  },
+  "hong-kong-island": {
+    "alt": "Dramatic cityscape with ocean and mountains under cloudy sky.",
+    "photo_url": "https://www.pexels.com/photo/a-view-of-the-city-from-the-water-with-a-cloudy-sky-27501919/",
+    "photographer": "Tito Zzzz",
+    "photographer_url": "https://www.pexels.com/@tizzy",
+    "provider": "Pexels",
+    "query": "Hong Kong Island Unknown Country travel city skyline"
+  },
+  "jakarta": {
+    "alt": "Aerial view of Jakarta's skyline showcasing modern skyscrapers and lush greenery under a cloudy sky.",
+    "photo_url": "https://www.pexels.com/photo/clouds-over-city-15714880/",
+    "photographer": "el jusuf",
+    "photographer_url": "https://www.pexels.com/@pamanjoe",
+    "provider": "Pexels",
+    "query": "Jakarta Indonesia travel city skyline"
+  },
+  "johannesburg": {
+    "alt": "Stunning panoramic view of Johannesburg skyline with lush greenery and blue skies.",
+    "photo_url": "https://www.pexels.com/photo/panoramic-view-of-johannesburg-skyline-33702740/",
+    "photographer": "Zak H",
+    "photographer_url": "https://www.pexels.com/@zakh",
+    "provider": "Pexels",
+    "query": "Johannesburg South Africa travel city skyline"
+  },
+  "karachi": {
+    "alt": "Vibrant cultural scene with a decorated camel and crowd on a busy beach with city skyline.",
+    "photo_url": "https://www.pexels.com/photo/men-on-a-shore-and-camel-walking-with-a-decorative-saddle-14851042/",
+    "photographer": "Zain Ali",
+    "photographer_url": "https://www.pexels.com/@zaktech90",
+    "provider": "Pexels",
+    "query": "Karachi Pakistan travel city skyline"
+  },
+  "kolkata": {
+    "alt": "Vibrant evening view of Howrah Bridge in Kolkata with dynamic traffic and city lights.",
+    "photo_url": "https://www.pexels.com/photo/howrah-bridge-at-night-in-kolkata-india-33612641/",
+    "photographer": "Sudipto Chakrabarty",
+    "photographer_url": "https://www.pexels.com/@sudipto-chakrabarty-2152424918",
+    "provider": "Pexels",
+    "query": "Kolkata India travel city skyline"
+  },
+  "kuala-lumpur": {
+    "alt": "A silhouette of a man overlooking the Kuala Lumpur skyline, featuring the iconic KL Tower.",
+    "photo_url": "https://www.pexels.com/photo/man-standing-while-facing-concrete-buildings-303159/",
+    "photographer": "Adil Alimbetov",
+    "photographer_url": "https://www.pexels.com/@cheepo2109",
+    "provider": "Pexels",
+    "query": "Kuala Lumpur Malaysia travel city skyline"
+  },
+  "lagos": {
+    "alt": "Scenic view of Lagos skyline featuring modern buildings and a motorboat in the lagoon under a bright sky.",
+    "photo_url": "https://www.pexels.com/photo/modern-lagos-skyline-with-watercraft-in-lagoon-37405043/",
+    "photographer": "Onakoya Opeyemi",
+    "photographer_url": "https://www.pexels.com/@onakoya-opeyemi-316476857",
+    "provider": "Pexels",
+    "query": "Lagos Nigeria travel city skyline"
+  },
+  "lima": {
+    "alt": "Aerial view of the historic urban landscape in Lima, Peru, showcasing classic architectural styles.",
+    "photo_url": "https://www.pexels.com/photo/concrete-buildings-in-the-city-13708160/",
+    "photographer": "Qingju Wen",
+    "photographer_url": "https://www.pexels.com/@wenn",
+    "provider": "Pexels",
+    "query": "Lima Peru travel city skyline"
+  },
+  "london": {
+    "alt": "Dramatic night view of London's skyline featuring modern skyscrapers and the historical Tower of London.",
+    "photo_url": "https://www.pexels.com/photo/20-fenchurch-street-skyscraper-and-tower-of-london-at-night-14936005/",
+    "photographer": "Manzoni Studios",
+    "photographer_url": "https://www.pexels.com/@manzoni-studios-59597719",
+    "provider": "Pexels",
+    "query": "London United Kingdom travel city skyline"
+  },
+  "los-angeles": {
+    "alt": "Stunning long exposure of Los Angeles downtown skyline with light trails and illuminated skyscrapers.",
+    "photo_url": "https://www.pexels.com/photo/los-angeles-downtown-skyline-at-night-35291210/",
+    "photographer": "Stephen Leonardi",
+    "photographer_url": "https://www.pexels.com/@stephen-leonardi-587681991",
+    "provider": "Pexels",
+    "query": "Los Angeles United States travel city skyline"
+  },
+  "madrid": {
+    "alt": "Beautiful cityscape of Madrid, Spain, captured during twilight with iconic landmarks visible.",
+    "photo_url": "https://www.pexels.com/photo/cityscape-of-madrid-22922043/",
+    "photographer": "Emilio Garcia",
+    "photographer_url": "https://www.pexels.com/@emilio-garcia-96280844",
+    "provider": "Pexels",
+    "query": "Madrid Spain travel city skyline"
+  },
+  "manila": {
+    "alt": "A stunning aerial view of Manila cityscape at night featuring brightly lit skyscrapers and urban glow.",
+    "photo_url": "https://www.pexels.com/photo/buildings-in-the-city-during-night-time-4944109/",
+    "photographer": "Wilson Ren",
+    "photographer_url": "https://www.pexels.com/@wanxianren",
+    "provider": "Pexels",
+    "query": "Manila Philippines travel city skyline"
+  },
+  "melbourne": {
+    "alt": "A breathtaking view of Melbourne's skyline over the waterfront, showcasing modern skyscrapers.",
+    "photo_url": "https://www.pexels.com/photo/buildings-near-body-of-water-1766230/",
+    "photographer": "Hugo Heimendinger",
+    "photographer_url": "https://www.pexels.com/@alwaysontheroad",
+    "provider": "Pexels",
+    "query": "Melbourne Australia travel city skyline"
+  },
+  "mexico-city": {
+    "alt": "A stunning aerial view of Chapultepec Park with cityscape and mountains in the background.",
+    "photo_url": "https://www.pexels.com/photo/aerial-view-of-chapultepec-park-in-mexico-city-28577135/",
+    "photographer": "Erhart Fabian Castillo Castellanos",
+    "photographer_url": "https://www.pexels.com/@erhart-fabian-castillo-castellanos-179012",
+    "provider": "Pexels",
+    "query": "Mexico City Mexico travel city skyline"
+  },
+  "miami": {
+    "alt": "Captivating view of Miami's illuminated skyline at night, showcasing its modern architecture and vibrant city life.",
+    "photo_url": "https://www.pexels.com/photo/illuminated-skyline-of-miami-at-night-19705160/",
+    "photographer": "Alain Garcia",
+    "photographer_url": "https://www.pexels.com/@shotbyadrone",
+    "provider": "Pexels",
+    "query": "Miami United States travel city skyline"
+  },
+  "moscow": {
+    "alt": "Stunning night view of Moscow's illuminated skyline with reflections on the river.",
+    "photo_url": "https://www.pexels.com/photo/city-buildings-near-body-of-water-417374/",
+    "photographer": "Pixabay",
+    "photographer_url": "https://www.pexels.com/@pixabay",
+    "provider": "Pexels",
+    "query": "Moscow Russia travel city skyline"
+  },
+  "mumbai": {
+    "alt": "Vibrant view of Mumbai's skyline with local fishing boats on the water, capturing urban and traditional life.",
+    "photo_url": "https://www.pexels.com/photo/mumbai-city-and-fishers-in-the-sea-9169886/",
+    "photographer": "Asif pav",
+    "photographer_url": "https://www.pexels.com/@asifpav",
+    "provider": "Pexels",
+    "query": "Mumbai India travel city skyline"
+  },
+  "nairobi": {
+    "alt": "Nairobi cityscape featuring modern skyscrapers and lush greenery on a cloudy day.",
+    "photo_url": "https://www.pexels.com/photo/skyscrapers-in-nairobi-9833512/",
+    "photographer": "Justin  Brian",
+    "photographer_url": "https://www.pexels.com/@amurephotography",
+    "provider": "Pexels",
+    "query": "Nairobi Kenya travel city skyline"
+  },
+  "new-york": {
+    "alt": "A dramatic view of the skyscrapers of New York City captured from the Brooklyn Bridge.",
+    "photo_url": "https://www.pexels.com/photo/commercial-buildings-1461370/",
+    "photographer": "Vlad Alexandru Popa",
+    "photographer_url": "https://www.pexels.com/@vladalex94",
+    "provider": "Pexels",
+    "query": "New York United States travel city skyline"
+  },
+  "osaka": {
+    "alt": "Explore the vibrant cityscape of Osaka, Japan, with this breathtaking aerial view showcasing its modern architecture and skyline.",
+    "photo_url": "https://www.pexels.com/photo/panoramic-view-of-osaka-city-skyline-28358774/",
+    "photographer": "Samuel Seelig",
+    "photographer_url": "https://www.pexels.com/@samuel-seelig-5998373",
+    "provider": "Pexels",
+    "query": "Osaka Japan travel city skyline"
+  },
+  "rio-de-janeiro": {
+    "alt": "Christ the Redeemer statue on Corcovado Mountain with Rio de Janeiro cityscape under a cloudy sky.",
+    "photo_url": "https://www.pexels.com/photo/christ-the-redeemer-overlooking-rio-de-janeiro-skyline-36953264/",
+    "photographer": "Jonathan Borba",
+    "photographer_url": "https://www.pexels.com/@jonathanborba",
+    "provider": "Pexels",
+    "query": "Rio de Janeiro Brazil travel city skyline"
+  },
+  "riyadh": {
+    "alt": "Beautiful view of Riyadh Water Tower silhouetted against a stunning sunset sky.",
+    "photo_url": "https://www.pexels.com/photo/riyadh-water-tower-in-saudi-arabia-5625713/",
+    "photographer": "Alamin Prodhania",
+    "photographer_url": "https://www.pexels.com/@alamin-prodhania-77895",
+    "provider": "Pexels",
+    "query": "Riyadh Saudi Arabia travel city skyline"
+  },
+  "s-o-paulo": {
+    "alt": "Night view of S\u00e3o Paulo's illuminated skyline with a park and lake in the foreground.",
+    "photo_url": "https://www.pexels.com/photo/aerial-photography-of-central-park-in-new-york-281514/",
+    "photographer": "Kaique Rocha",
+    "photographer_url": "https://www.pexels.com/@hikaique",
+    "provider": "Pexels",
+    "query": "S\u00e3o Paulo Brazil travel city skyline"
+  },
+  "santiago": {
+    "alt": "Panoramic view of Santiago's skyline with Andes mountains in the background.",
+    "photo_url": "https://www.pexels.com/photo/santiago-skyline-with-andes-mountains-backdrop-37309391/",
+    "photographer": "Nikolai Kolosov",
+    "photographer_url": "https://www.pexels.com/@nikolai-kolosov",
+    "provider": "Pexels",
+    "query": "Santiago Chile travel city skyline"
+  },
+  "santiago-de-cuba": {
+    "alt": "Stunning architecture of a Cuban government building with national flag waving under a clear blue sky.",
+    "photo_url": "https://www.pexels.com/photo/facade-of-government-building-4226029/",
+    "photographer": "alleksana",
+    "photographer_url": "https://www.pexels.com/@alleksana",
+    "provider": "Pexels",
+    "query": "Santiago de Cuba Cuba travel city skyline"
+  },
+  "seoul": {
+    "alt": "Panoramic view of Seoul's skyline shrouded in fog, framed by lush autumn foliage.",
+    "photo_url": "https://www.pexels.com/photo/panorama-city-and-trees-366107/",
+    "photographer": "Tranmautritam",
+    "photographer_url": "https://www.pexels.com/@tranmautritam",
+    "provider": "Pexels",
+    "query": "Seoul South Korea travel city skyline"
+  },
+  "shanghai": {
+    "alt": "Vibrant Shanghai skyline at night featuring iconic skyscrapers and colorful lighting reflections on water.",
+    "photo_url": "https://www.pexels.com/photo/shanghai-skyline-at-night-23507181/",
+    "photographer": "\u9c7c \u6728",
+    "photographer_url": "https://www.pexels.com/@595845759",
+    "provider": "Pexels",
+    "query": "Shanghai China travel city skyline"
+  },
+  "singapore": {
+    "alt": "Night view of Singapore's illuminated skyline and Marina Bay Sands, reflecting vibrant city lights.",
+    "photo_url": "https://www.pexels.com/photo/marina-bay-illuminated-at-night-18662417/",
+    "photographer": "Mark Baldovino",
+    "photographer_url": "https://www.pexels.com/@odlab2",
+    "provider": "Pexels",
+    "query": "Singapore Singapore travel city skyline"
+  },
+  "sydney": {
+    "alt": "Stunning view of Sydney Harbour Bridge and Sydney Opera House on a sunny day, showcasing the vibrant cityscape.",
+    "photo_url": "https://www.pexels.com/photo/view-of-sydney-on-a-sunny-day-783681/",
+    "photographer": "Belle Co",
+    "photographer_url": "https://www.pexels.com/@belle-co-99483",
+    "provider": "Pexels",
+    "query": "Sydney Australia travel city skyline"
+  },
+  "taipei": {
+    "alt": "Night view of the Taipei skyline featuring the illuminated Taipei 101 amid modern skyscrapers.",
+    "photo_url": "https://www.pexels.com/photo/illuminated-skyline-of-taipei-taiwan-at-night-23106806/",
+    "photographer": "Ehsan Haque",
+    "photographer_url": "https://www.pexels.com/@itsehsanh",
+    "provider": "Pexels",
+    "query": "Taipei Taiwan travel city skyline"
+  },
+  "tehran": {
+    "alt": "Stunning panoramic view of Tehran's skyline at dusk, showcasing the city's dense urban environment and architectural diversity.",
+    "photo_url": "https://www.pexels.com/photo/aerial-view-of-tehran-s-urban-landscape-at-dusk-31468386/",
+    "photographer": "Mehdi Salehi",
+    "photographer_url": "https://www.pexels.com/@meeehdisalehi",
+    "provider": "Pexels",
+    "query": "Tehran Iran travel city skyline"
+  },
+  "tokyo": {
+    "alt": "A breathtaking aerial view of Tokyo's skyline featuring the iconic Tokyo Skytree.",
+    "photo_url": "https://www.pexels.com/photo/tokyo-skytree-over-buildings-in-city-20378135/",
+    "photographer": "Rin Gakusho",
+    "photographer_url": "https://www.pexels.com/@rin-gakusho-280714394",
+    "provider": "Pexels",
+    "query": "Tokyo Japan travel city skyline"
+  },
+  "toronto": {
+    "alt": "Scenic view of Toronto city skyline featuring the CN Tower and waterfront under a clear blue sky.",
+    "photo_url": "https://www.pexels.com/photo/cityscape-of-toronto-16669433/",
+    "photographer": "Isnar Silva",
+    "photographer_url": "https://www.pexels.com/@isnar-silva-547930172",
+    "provider": "Pexels",
+    "query": "Toronto Canada travel city skyline"
+  },
+  "vienna": {
+    "alt": "Stunning aerial view of Vienna showcasing Votive Church and the city's historic architecture.",
+    "photo_url": "https://www.pexels.com/photo/aerial-view-of-vienna-s-cityscape-with-votive-church-37449575/",
+    "photographer": "Eleonora Vokueva",
+    "photographer_url": "https://www.pexels.com/@eleonora-vokueva-2161345723",
+    "provider": "Pexels",
+    "query": "Vienna Austria travel city skyline"
+  }
+}
