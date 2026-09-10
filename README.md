@@ -1,7 +1,5 @@
 # Dreamroute
 
-> **Internship-winning full-stack project** — a Flask-powered travel recommendation website for people who want more character from their trip planning.
-
 Dreamroute is a full-stack travel recommender that turns personal preferences into three ranked destination suggestions. Built with Astro, React, custom CSS, Flask, SQLAlchemy, and SQLite, it pairs a familiar travel-search workflow with a deliberately nostalgic Myspace-inspired interface and cyberpunk visual language.
 
 Rather than imitate the polished minimalism of typical travel sites, Dreamroute embraces the energy of the early internet: glitch effects, neon graphics, dense panels, and retro 90s references. The goal is to make travel discovery feel personal and memorable for a tech-oriented audience that is tired of corporate, interchangeable booking experiences—without sacrificing usability. Familiar patterns from Booking.com, Expedia, and Kayak, including filter controls, a clear call to action, and focused recommendation panels, keep the experience intuitive.
