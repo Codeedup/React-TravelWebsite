@@ -14,7 +14,6 @@ export default function DestinationGrid({
         visibleDestinations.map((destination, index) => (
           <DestinationCard
             destination={destination}
-            index={index}
             key={`${destination.destination}-${destination.country}-${index}`}
           />
         ))

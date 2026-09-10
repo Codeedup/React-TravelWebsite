@@ -9,6 +9,7 @@ CORS(app)
 
 DATABASE_NAME = "travel_planner.db"
 WEATHER_OPTIONS = ["Hot", "Mild", "Cold"]
+SCORING_FILTER_KEYS = ("cost", "weather", "activity", "vibe")
 MONTH_NAMES = {
     1: "January", 2: "February", 3: "March", 4: "April",
     5: "May", 6: "June", 7: "July", 8: "August",
@@ -156,7 +157,14 @@ def get_search_payload(selected_filters):
     finally:
         conn.close()
 
-    active_filters = {key: value for key, value in selected_filters.items() if value}
+    # A month chooses the weather record to show and evaluate, but every destination has
+    # a record for every month. It therefore provides context rather than a scoreable
+    # distinction between destinations.
+    scoring_filters = {
+        key: selected_filters[key]
+        for key in SCORING_FILTER_KEYS
+        if selected_filters.get(key)
+    }
     results = []
 
     for row in destination_rows:
@@ -175,11 +183,9 @@ def get_search_payload(selected_filters):
         weather_band = weather_band_for_temp(chosen_weather["AvgTempC"]) if chosen_weather else ""
 
 
-        #count how many matches to rank them later
+        # Count only preferences that can distinguish one destination from another.
         match_count = 0
         if normalize(selected_filters.get("cost", "")) == normalize(row["BudgetLevel"]):
-            match_count += 1
-        if selected_filters.get("month") and chosen_weather and chosen_weather["Month"] == selected_month:
             match_count += 1
         if normalize(selected_filters.get("weather", "")) == normalize(weather_band):
             match_count += 1
@@ -201,7 +207,7 @@ def get_search_payload(selected_filters):
             "month": MONTH_NAMES.get(chosen_weather["Month"], "") if chosen_weather else "",
             "vibes": vibe_names,
             "match_count": match_count,
-            "selected_filter_count": len(active_filters),
+            "scored_filter_count": len(scoring_filters),
         })
 
     #show the best destination

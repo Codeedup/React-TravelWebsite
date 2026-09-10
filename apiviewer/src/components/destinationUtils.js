@@ -22,16 +22,18 @@ export function formatOptionLabel(value = "") {
     .join(" ");
 }
 
-export function getMatchPercent(destination, index = 0) {
-  const selectedFilterCount = Number(destination.selected_filter_count || 0);
+export function getMatchPercent(destination) {
+  const scoredFilterCount = Number(destination.scored_filter_count || 0);
   const matchCount = Number(destination.match_count || 0);
 
-  if (selectedFilterCount > 0) {
-    const ratio = matchCount / selectedFilterCount;
-    return Math.round(72 + ratio * 26);
+  if (!Number.isFinite(scoredFilterCount) || scoredFilterCount <= 0) {
+    return null;
   }
 
-  return Math.max(81, 94 - index * 2);
+  const boundedMatchCount = Number.isFinite(matchCount)
+    ? Math.min(Math.max(matchCount, 0), scoredFilterCount)
+    : 0;
+  return Math.round((boundedMatchCount / scoredFilterCount) * 100);
 }
 
 export function getWeatherLine(destination) {

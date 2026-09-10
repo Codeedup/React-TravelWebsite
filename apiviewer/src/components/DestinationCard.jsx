@@ -9,12 +9,13 @@ import {
 } from "./destinationUtils";
 
 //populates one destination card from the API info with a slugified name, a stored image, and the tags. 
-export default function DestinationCard({ destination, index = 0 }) {
+export default function DestinationCard({ destination }) {
   const [imageFailed, setImageFailed] = useState(false);
   const slug = slugifyDestination(destination.destination);
   const imageSrc = getDestinationImageSrc(destination.destination);
   const imageCredit = getDestinationImageCredit(destination.destination);
   const imageAlt = imageCredit?.alt || `${destination.destination}, ${destination.country}`;
+  const matchPercent = getMatchPercent(destination);
   const tags = [
     destination.cost,
     destination.weather_band,
@@ -37,8 +38,8 @@ export default function DestinationCard({ destination, index = 0 }) {
           />
         )}
         <span className="match-badge">
-          {getMatchPercent(destination, index)}%
-          <small>match</small>
+          {matchPercent === null ? "—" : `${matchPercent}%`}
+          <small>{matchPercent === null ? "no scored criteria" : "criteria match"}</small>
         </span>
         <span className="card-stamp" aria-hidden="true">
           DREAMROUTE<br />RECOMMENDED
