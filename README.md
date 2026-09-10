@@ -1,147 +1,117 @@
-## DREAMROUTE_
-The app of tomorrow, today! Have you ever spent a lot of time scouring the internet for the perfect holiday destination? Look no further, the DREAMROUTE app will help you find your dream holiday destination! The only thing you have to do is answer five simple questions, and you'll have three options to choose from.
+# Dreamroute
 
-## Project Description
-This project is part of a class assignment for the Full-Stack Development module. The resulting app is the creation of hard work from Dylan Moffet, Nicusor Ghinea, and Theo Bailey. We used Astro as the main framework for the project, React for the frontend, Python with SQL to develop the database, and finally, Python with Flask to create our own API that communicates directly with our Astro project.
+> **Internship-winning full-stack project** — a Flask-powered travel recommendation website for people who want more character from their trip planning.
 
-## Report Files
-Group-report-fullstack: Our short description of the project
-Group Contribution - Full Stack Development: Log of all our meetings and discussions
-photo_evidences: Visuals of our project throughout development
-travel_destinations.png: Mermaid diagram showing database desing
-individual reflection: Our own individual reflection
-video: Quick video detailing how the project works
+Dreamroute is a full-stack travel recommender that turns personal preferences into three ranked destination suggestions. Built with Astro, React, custom CSS, Flask, SQLAlchemy, and SQLite, it pairs a familiar travel-search workflow with a deliberately nostalgic Myspace-inspired interface and cyberpunk visual language.
 
-The following readme has the following sections:
-1) Project Structure
-2) How to run and use the app
-3) Data base visualiation
-4) References
+Rather than imitate the polished minimalism of typical travel sites, Dreamroute embraces the energy of the early internet: glitch effects, neon graphics, dense panels, and retro 90s references. The goal is to make travel discovery feel personal and memorable for a tech-oriented audience that is tired of corporate, interchangeable booking experiences—without sacrificing usability. Familiar patterns from Booking.com, Expedia, and Kayak, including filter controls, a clear call to action, and focused recommendation panels, keep the experience intuitive.
 
-## Project Structure
+![Dreamroute results page showing three personalised destination recommendations and the filter controls](report/photo_evidences/phase_three/final_ui.png)
+
+*Dreamroute’s cyberpunk recommendation interface: three ranked matches, visible filter choices, and destination-level travel data.*
+
+## How it works
+
+1. The traveller chooses preferences for **cost**, **month**, **weather**, **activity**, and **vibe**.
+2. Selecting **Find My Destination** sends those choices to the Flask API.
+3. The API queries the SQLite travel dataset, scores each destination against the selected filters, and returns the highest-ranked matches.
+4. Astro and React render three recommendation panels with the match score and useful context, including cost, weather, local activity, and vibe.
+
+The recommendation score reflects how closely a destination matches the chosen filters, making it easy to compare options at a glance rather than browse an undifferentiated list.
+
+## Product and design rationale
+
+Dreamroute was designed as a disruption of the clean, minimalist travel website. Its Myspace-inspired layout and cyberpunk/glitch artwork are intentionally expressive, evoking early-internet nostalgia while preserving the interaction patterns users already understand. The result is a practical search tool with a visual identity that does not look—or feel—like a standard travel page.
+
+## Built with
+
+| Area | Technology | Purpose |
+| --- | --- | --- |
+| Frontend | [Astro](https://astro.build/), [React](https://react.dev/), custom CSS | Interactive interface, filtering flow, and responsive recommendation panels |
+| Backend | [Flask](https://flask.palletsprojects.com/) | REST API that filters, ranks, and returns destination recommendations |
+| Data | [SQLAlchemy](https://www.sqlalchemy.org/), [SQLite](https://www.sqlite.org/) | Relational storage for destinations, cost, weather, activities, and vibes |
+| Data sources | [Open-Meteo](https://open-meteo.com/) and [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/) | Destination, geographic, climate, and descriptive information |
+
+## Team and individual ownership
+
+This was a collaborative project. The responsibilities below identify each contributor’s primary areas of ownership; planning, integration, and review were shared across the team.
+
+| Contributor | Primary ownership |
+| --- | --- |
+| **Dylan Moffett** | Frontend experience and product presentation: developed and iterated the Myspace/cyberpunk interface, implemented the Astro/React recommendation flow and filters, integrated destination imagery, and refined the search, accessibility, documentation, and final project presentation. |
+| **Nicusor Ghinea** | Backend and data foundation: developed the Flask API and its test tooling, built and maintained the SQLite data layer, and supported database setup, population, validation, and project structure. |
+| **Theo Bailey** | Destination-card imagery: contributed image support for the React destination cards. |
+
+## Project structure
 
 ```text
 .
-├── apiserver/                  # Python backend API (Flask)
-│   ├── notebooks/              # Utility and testing notebooks
-│   ├── server.py               # Main Flask API entry point
-│   └── test_api_connection.py  # Health check script for endpoints
-├── apiviewer/                  # Astro frontend application
-│   ├── public/                 # Static assets
-│   └── src/                    # Frontend source code
-├── report/                     # Project documentation and evidence
-│   ├── photo_evidences/        # Supporting images
-│   └── video/                  # Video demonstrations
-└── setup/                      # Database schema and population logic
-    ├── notebooks/              # Utility and testing notebooks
-    ├── db_populate.py          # Script to seed the database via APIs
-    ├── setup.py                # Script to initialize database tables
-    └── travel_planner.db       # SQLite database file
+├── apiserver/                  # Flask API and endpoint checks
+├── apiviewer/                  # Astro + React frontend
+│   ├── public/                 # Static UI and destination assets
+│   └── src/                    # Pages, components, and custom styles
+├── setup/                      # SQLite schema, data population, and image tools
+└── report/                     # Project report, video, and visual evidence
 ```
-## How to run and use the app
 
-To run DREAMROUTE, start from the main project folder. The backend and frontend run in separate terminal windows, so keep one terminal for Flask and another for Astro.
+## Run locally
 
-1. Install the Python dependencies
+### Prerequisites
 
-Run this from the project root:
+- Python 3
+- Node.js and npm
 
-```text
+### 1. Install Python dependencies
+
+From the project root:
+
+```bash
 pip install -r requirements.txt
 ```
 
-2. Create and populate the database
+### 2. Create and populate the database
 
-These commands reset the SQLite tables and then fill them with destination, weather, activity, vibe, and cost data:
-
-```text
+```bash
 python setup/setup.py
 python setup/db_populate.py
 ```
 
-3. Start the Flask API
+### 3. Start the Flask API
 
-In your first terminal, run this from the project root:
+In one terminal:
 
-```text
+```bash
 python apiserver/server.py
 ```
 
-The API will run at `http://127.0.0.1:5001`.
+The API runs at `http://127.0.0.1:5001`.
 
-4. Start the Astro frontend
+### 4. Start the Astro frontend
 
-In a second terminal, move into the frontend folder and start Astro:
+In a second terminal:
 
-```text
+```bash
 cd apiviewer
 npm install
 npm run dev
 ```
 
-The website will run at `http://localhost:4321`.
+Open `http://localhost:4321` in a browser.
 
-5. Open the app
+### 5. Optional: check the API
 
-Open your browser and go to:
+With the Flask server running:
 
-```text
-http://localhost:4321
-```
-
-If you want to quickly check that the API is responding, keep the Flask server running and use:
-
-```text
+```bash
 python apiserver/test_api_connection.py
 ```
 
-## Database Visualisation Table
-Our database is formed of 7 tables. The main table, "Destinations", stores core city details. To store other relevant data, we are using the "Cost_Profiles", "Weather_Monthly", "Activities", and "Travel_Vibes" tables to provide specific, individual data. Finally, we use two junction tables, "Destination_Vibes" and "Destination_Activities", which contain the foreign keys needed to efficiently connect and map this data together.
+## Data model
+
+The SQLite database relates destinations to cost profiles, monthly weather, activities, and travel vibes. Junction tables connect destinations to their activities and vibe tags, allowing the API to evaluate all five traveller preferences when ranking recommendations.
 
 ```mermaid
 erDiagram
-    DESTINATIONS {
-        INTEGER DestinationID PK
-        VARCHAR CityName
-        VARCHAR Country
-        VARCHAR Description
-    }
-
-    COST_PROFILES {
-        INTEGER CostID PK
-        INTEGER DestinationID FK
-        VARCHAR BudgetLevel
-    }
-
-    WEATHER_MONTHLY {
-        INTEGER WeatherID PK
-        INTEGER DestinationID FK
-        INTEGER Month
-        FLOAT AvgTempC
-        FLOAT RainfallMM
-    }
-
-    ACTIVITIES {
-        INTEGER ActivityID PK
-        VARCHAR ActivityName
-    }
-
-    DESTINATIONS_ACTIVITIES {
-        INTEGER DestinationID PK, FK
-        INTEGER ActivityID PK, FK
-        VARCHAR Spotlight_Description
-    }
-
-    TRAVEL_VIBES {
-        INTEGER VibeID PK
-        VARCHAR VibeName
-    }
-
-    DESTINATION_VIBES {
-        INTEGER DestinationID PK, FK
-        INTEGER VibeID PK, FK
-    }
-
     DESTINATIONS ||--o| COST_PROFILES : "has cost profile"
     DESTINATIONS ||--o{ WEATHER_MONTHLY : "has monthly weather"
     DESTINATIONS ||--o{ DESTINATIONS_ACTIVITIES : "links to activities"
@@ -150,21 +120,6 @@ erDiagram
     TRAVEL_VIBES ||--o{ DESTINATION_VIBES : "tags destinations"
 ```
 
-
-## References & Technologies
-
-| Category | Resource | Purpose |
-| :--- | :--- | :--- |
-| **Frontend** | [Astro](https://astro.build/) & [React](https://react.dev/) | Framework and component architecture |
-| **Backend** | [Flask](https://flask.palletsprojects.com/) | Python API framework |
-| **Database** | [SQLAlchemy](https://www.sqlalchemy.org/) & [SQLite](https://www.sqlite.org/) | ORM and relational storage |
-| **Data (Geo)**| [Open-Meteo Geocoding API](https://open-meteo.com/) | City coordinates and population data |
-| **Data (Climate)**| [Open-Meteo Archive API](https://open-meteo.com/) | Historical temperature and rainfall data |
-| **Data (Info)** | [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/) | Automated city descriptions |
-| **Data Reading** | [JSON](https://www.json.org/) | Data exchange specifications |
-| **Design** | [MDN CSS Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout) | CSS Grid layouts |
-
-
 ## Licence
 
-This project is licensed for educational use and not to be used as a product that can generate revenue.
+This project is provided for educational and portfolio purposes and is not intended for commercial use.
